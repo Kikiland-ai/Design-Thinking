@@ -1,10 +1,10 @@
 # Backend implementation continuation
 
-Status: Context imported; application implementation not started
+Status: Context imported; first session loads context and waits for the user's thoughts; application implementation not started
 
 ## Objective
 
-Build the seven core prototypes described in the pinned source proposal, starting with one source-backed concept, mixed-language speech, animated graphics, image annotation, diagnosis, and evidence-driven follow-up.
+Establish the right product context before the user chooses how to move toward the seven core prototypes. The first implementation slice and sequence remain proposals, not startup actions.
 
 ## Baseline
 
@@ -12,11 +12,11 @@ Read `context/README.md` and `context/design-thinking/SOURCE.json` for source au
 
 ## Now
 
-Verify the snapshot and BB8 checks. Scaffold the runtime-validated TypeScript API, dependencies/lockfile, and emulator integration. Port two reviewed concept fixtures and stable lesson/speech/scene/annotation contracts. Record actual executed results below.
+Follow CONTEXT-BOOT.md in read-only mode: load core sources, verify the snapshot if tools are available, report what was actually read or missing, and wait for the user's thoughts. Do not build, install, configure, start services, or modify files during this pass.
 
 ## Next
 
-Trial real mixed-language synthesis; generate one reviewed GIF plus editable scene; synchronize image annotations against actual audio timing. Connect diagnostic evidence and curation. Trial actual Simulink observation/overlay access early.
+Discuss the user's thoughts and desired direction. Begin implementation only after they request it; earlier API/media/trial suggestions remain later reference material.
 
 ## Open questions and boundaries
 
@@ -29,4 +29,4 @@ Trial real mixed-language synthesis; generate one reviewed GIF plus editable sce
 
 ## Session log and exact next action
 
-Initial next action: run source/BB8 checks, read the first-session prompt, and scaffold the first API slice. Replace this section with actual checks, current failures, changed files, and a concrete continuation point before ending each substantive session.
+Initial next action: follow CONTEXT-BOOT.md, summarize actual context readiness, and wait. Do not edit this plan during read-only boot. After authorized implementation, record checks, failures, changed files, and the exact continuation point here.

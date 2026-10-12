@@ -30,7 +30,7 @@ class BackendStarterChecks(unittest.TestCase):
                     original = subprocess.check_output(['git', 'show', REVISION + ':' + name], cwd=ROOT)
                     self.assertEqual(raw, original, name)
                     self.assertEqual(hashlib.sha256(raw).hexdigest(), expected['sha256'])
-                for name in ['AGENTS.md', 'SETUP.md', 'context/KNOWN-GAPS.md',
+                for name in ['AGENTS.md', 'CONTEXT-BOOT.md', 'SETUP.md', 'context/KNOWN-GAPS.md',
                              '.agents/skills/bb8/SKILL.md', '.claude/skills/bb8/SKILL.md',
                              '.agents/plugins/marketplace.json', 'firebase.json']:
                     self.assertIn(name, z.namelist())
