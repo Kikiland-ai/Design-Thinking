@@ -97,6 +97,7 @@ def bundle(root=ROOT):
     files['AGENTS.md'] = merge_instructions('', fragment).encode()
     files['CLAUDE.md'] = merge_instructions('', '@AGENTS.md\n\nUse `/bb8` for coordinated work. BB8 project skills are under `.claude/skills/`.').encode()
     files['BB8.md'] = (root / 'BB8.md').read_bytes()
+    files['.agents/plugins/marketplace.json'] = (root / '.agents/plugins/marketplace.json').read_bytes()
     files['.github/workflows/bb8-check.yml'] = (root / '.github/workflows/bb8-check.yml').read_bytes()
     return files
 

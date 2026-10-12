@@ -1,5 +1,9 @@
 # Use BB8 in this repository
 
+For ChatGPT `@bb8`, first follow [the ChatGPT installation guide](bb8/docs/CHATGPT-INSTALL.md).
+GitHub files alone do not register BB8 in the chat's skill picker. Repo-scoped
+Codex and Claude skills use different discovery and invocation paths.
+
 BB8 0.2.1 is bundled under `bb8/`, with 21 unchanged packaged skills.
 The reference adapter is 0.1.0. Start with [AGENTS.md](AGENTS.md) and
 [the BB8 usage guide](bb8/docs/BB8-GUIDE.md).

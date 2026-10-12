@@ -1,5 +1,11 @@
 # Claude Code and Codex discovery
 
+For ChatGPT `@bb8`, follow [the plugin installation guide](CHATGPT-INSTALL.md).
+The repository marketplace at `.agents/plugins/marketplace.json` exposes only
+BB8 for supported local clients to install; it does not install itself into
+a running hosted chat. ChatGPT uses `@` selection, Codex CLI/IDE uses `/skills`
+or `$bb8`, and Claude Code uses `/bb8`.
+
 The original BB8 skills and harness remain unchanged. Small generated project
 skills expose their names and descriptions in each host's discovery location.
 

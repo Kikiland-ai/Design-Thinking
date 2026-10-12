@@ -181,6 +181,10 @@ class ProvisioningTests(unittest.TestCase):
         self.assertIn('.github/workflows/bb8-check.yml', files)
         self.assertNotIn('.github/workflows/bb8-org-bootstrap.yml', files)
         self.assertIn('CLAUDE.md', files)
+        self.assertIn('.agents/plugins/marketplace.json', files)
+        marketplace = json.loads(files['.agents/plugins/marketplace.json'])
+        self.assertEqual([plugin['name'] for plugin in marketplace['plugins']], ['bb8'])
+        self.assertEqual(marketplace['plugins'][0]['source']['path'], './bb8')
         self.assertEqual(len([path for path in files if path.startswith('.claude/') and path.endswith('SKILL.md')]), 21)
         self.assertEqual(len([path for path in files if path.startswith('.agents/') and path.endswith('SKILL.md')]), 21)
 
