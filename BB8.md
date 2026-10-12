@@ -33,8 +33,12 @@ python bb8/adapters/reference/bb8.py prepare \
 Pass the prepared packet to an existing IDE, CLI, or chat agent through its
 supported input mechanism. The loader does not execute a model or tools.
 
-Native plugin discovery requires separate host registration. Repository files
-alone do not activate BB8 in a hosted session. See the
+Local project skill discovery uses `.agents/skills/` for Codex and
+`.claude/skills/` for Claude Code. `CLAUDE.md` imports the root `AGENTS.md`.
+See [discovery and indexing checks](bb8/docs/AGENT-DISCOVERY.md).
+
+Native plugin discovery still requires separate host registration. Repository
+files alone do not activate a plugin in a hosted session. See the
 [original setup runbook](bb8/SESSION-SETUP-RUNBOOK.md). The `bb8/` root itself is
 the self-hosted capability directory; a hosted ZIP must have that sole top-level
 directory.
@@ -43,5 +47,6 @@ directory.
 
 See [the organization rollout proposal](bb8/docs/ORG-ROLLOUT.md). A template
 includes BB8 only when repo creation uses the template. Covering all creation
-paths requires an org-installed GitHub App or provisioning service handling
-`repository.created`; it has not been installed by this change.
+paths is implemented as an opt-in organization reconciliation workflow. It
+requires an administrator-managed GitHub App installation and activation.
+For BB8 to be present in the first commit, use the dedicated template route.

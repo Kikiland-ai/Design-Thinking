@@ -1,54 +1,94 @@
-# BB8 in new organization repositories
+# BB8 in every new Kikiland-ai repository
 
-Status: proposal only. No org configuration or repository creation has occurred.
-This proposal applies if the supplied target organization uses GitHub.
+Organization App installation and activation have not been performed or
+verified by this setup. The code is ready for an administrator's normal rollout.
 
-## Starter layout
+## Included implementation
 
-Include `bb8/` with the unchanged skill/harness source and the portable adapter.
-Merge `AGENTS.fragment.md` into each target's existing root `AGENTS.md` without
-overriding repo conventions. Keep the BB8 version and source checksum recorded.
-Do not use org-wide default instructions as proof of native plugin activation.
+- `.github/workflows/bb8-org-bootstrap.yml`: manual runs and roughly half-hourly reconciliation. GitHub schedules can be delayed.
+- `bb8/provisioning/bootstrap.py`: guarded, repeatable repository bootstrap.
+- `bb8/provisioning/config.json`: organization, creation cutoff, write policy, and controller exclusion.
+- `.github/workflows/bb8-check.yml`: package, discovery, and test validation.
+- `bb8/adapters/discovery/sync.py`: 21 wrappers per host and resource catalogue.
 
-## Template route
+The scheduled job runs only when `BB8_BOOTSTRAP_ENABLED=true`. It restricts
+work to Kikiland-ai repos accessible to the configured installation and created
+at or after the cutoff in config.json. It does not backfill older repos. A
+manual run can target one explicit repo, with dry run selected by default.
 
-Use a designated organization repository template containing these files. New
-repos created from the template inherit them. Repos created using other paths
-do not. Later template changes do not automatically update existing repos.
-This is suitable when repo creation is controlled by an agreed provisioning path.
+The source is the controller commit checked out by that run. The provisioner
+copies only the starter and validation workflow. It reads target tree metadata
+and existing AGENTS.md, CLAUDE.md, and the bootstrap marker to preserve instructions
+and check conflicts. It does not import application content or historical context.
 
-## Every-new-repo route
+## Writes and completion
 
-An organization-installed GitHub App or provisioning service handles
-`repository.created`. Install with access to all intended repositories,
-including future repos, and minimal Metadata-read, Contents-write, and
-Pull-requests-write permissions for a PR-based rollout. An org administrator
-must arrange the installation and secure webhook handling in its normal
-platform setup; this session does not request or access credentials.
+The default is a normal fast-forward commit to the default branch, without
+force push. If branch rules block it, one bootstrap PR is opened. Conflicts,
+read-only repos, pending PRs, and retries are reported as incomplete and make
+the run fail visibly. PRs must merge before BB8 appears on the default branch.
+No branch protections or organization rulesets are bypassed.
 
-The handler should:
+An empty repo receives an initialization marker commit, then the bundle.
+For BB8 to be present in the first commit, use a dedicated template.
 
-1. Verify the event signature and organization identity; deduplicate deliveries.
-2. Wait until the repository has a usable default-branch head. Define a separate
-   org-approved policy for empty repositories before creating their first commit.
-3. Load a pinned, reviewed BB8 release; validate exact 21-skill inventory and links.
-4. Check for existing BB8 instructions. Preserve existing AGENTS.md content and
-   avoid replacing local changes or another BB8 version without an update policy.
-5. Add missing BB8 files and a root instruction pointer in one branch/commit.
-6. Open a PR when branch protection or organization policy requires review.
-   Direct default-branch writes require an explicit organization policy.
-7. Record bootstrap state and expose failed events for retries.
+Completed installs have `.bb8-bootstrap.json` with plugin version, source
+revision, and bundle digest. Repeated scans leave them alone. Existing unmanaged
+BB8 files or conflicting wrappers are preserved and flagged. This is first-time
+bootstrap; upgrades require a separate reviewed update policy.
 
-Event-driven bootstrapping is eventually consistent, not an atomic part of repo
-creation. For BB8 to be present at the first commit, enforce creation through
-the template-backed provisioner. A webhook fallback can cover other paths.
+## Administrator activation
 
-## Limits and maintenance
+Install an approved GitHub App on all intended Kikiland-ai repos, including
+future repos, with Metadata read, Contents write, Pull requests write, and
+Workflows write permissions. A selected-repositories installation cannot
+automatically cover future repos.
 
-An org `.github` repo provides supported default community files; it does not
-copy arbitrary AGENTS.md, skills, or workflows into every new repository.
-Organization rulesets can govern changes, but do not install BB8 files.
-Repository files alone do not activate a native plugin in IDE or hosted agents.
+The controller uses administrator-managed runtime identity configuration through
+`BB8_APP_CLIENT_ID` and `BB8_APP_PRIVATE_KEY` in normal GitHub settings.
+These are code references; no credential values or account state were requested
+or inspected in this task.
 
-Pin and periodically upgrade BB8 through reviewed update PRs. Each host still
-needs its own supported plugin registration or explicit reference-loading path.
+1. Arrange the approved App installation and controller runtime identity.
+2. Review config.json's creation cutoff and direct-write policy.
+3. Set the controller variable `BB8_BOOTSTRAP_ENABLED=true`.
+4. Run **BB8 organization bootstrap** against a designated new test repo with dry run enabled; review its result, then apply.
+5. Confirm the commit, marker, 21 wrappers per host, and validation workflow. Test empty and protected repos too.
+6. Allow scheduled reconciliation and monitor failures or pending PRs.
+
+This session has no tool to install an organization App or configure its identity.
+Do not paste keys or tokens into this chat. Activation requires the administrator
+workflow above, rather than a claim that pushing files made automation live.
+
+## Dedicated template
+
+Build from a reviewed source checkout. Replace COMMIT_SHA with its full reviewed
+40-character commit SHA:
+
+```sh
+python bb8/provisioning/bootstrap.py package \
+  --source-revision COMMIT_SHA \
+  --output bb8-repo-starter.zip
+```
+
+This uses local files only. The archive includes shared instructions, BB8,
+both hosts' discovery, a complete bootstrap marker, and the validation workflow.
+It excludes the organization controller workflow and refuses to overwrite an
+existing output archive.
+
+Put those files in a dedicated org repo marked as a GitHub template. Use that
+template to create repos. Do not turn the application-bearing Design-Thinking
+repo into the generic template. Template changes do not update older repos.
+Activated reconciliation catches other creation paths after the cutoff.
+
+## Discovery is separate
+
+Supported Claude Code and Codex clients can discover the repo wrappers after
+checkout. This does not install a native hosted-session plugin or force a code
+search index. Follow [client discovery acceptance](AGENT-DISCOVERY.md).
+
+## Official references
+
+- [GitHub App token action](https://github.com/actions/create-github-app-token)
+- [Template repositories](https://docs.github.com/en/repositories/creating-and-managing-repositories/creating-a-template-repository)
+- [Scheduled workflows](https://docs.github.com/en/actions/reference/workflows-and-actions/events-that-trigger-workflows#schedule)

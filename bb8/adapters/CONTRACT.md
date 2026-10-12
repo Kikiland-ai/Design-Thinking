@@ -24,6 +24,9 @@ The host is responsible for tool exposure, permission enforcement, current-task
 instruction precedence, sandboxing, and command execution. BB8 is responsible
 for framing, routing, specialist procedures, and result coherence.
 
-The included reference adapter implements inventory validation and scoped
-prompt assembly. Model execution, native host registration, and cross-host
-behavioral equivalence require the target host; they are not implemented here.
+The reference adapter implements inventory validation and scoped prompt
+assembly. The discovery adapter generates Codex and Claude Code repository
+wrappers and a resource catalogue. The provisioner installs these files in
+explicitly configured new organization repos. Model execution, native hosted
+plugin registration, organization App activation, and runtime cross-host
+behavioral equivalence require the relevant host or administrator.
