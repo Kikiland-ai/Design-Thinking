@@ -1,4 +1,4 @@
-Breadboard is the design system for a bilingual Odia–English learning app for first-year engineering students. The app looks like a friendly electronics breadboard on graph paper, and Google's four colours appear only when the student earns them. A new student sees ink on `paper` with one spot of colour, Kiki's four dots. A student near mid-sem sees a map lit up in blue, red, yellow and green.
+Breadboard is the design system for a bilingual Odia–English learning app for first-year engineering students. The app looks like a friendly electronics breadboard on graph paper, and Google's four colours appear only when the student earns them. A new student sees ink on `paper` with one spot of colour, Kiki's four dots. A student near mid-sem sees a map lit up in green, red, yellow and blue.
 
 ## Content fundamentals
 
