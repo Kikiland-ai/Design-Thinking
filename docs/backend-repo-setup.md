@@ -2,7 +2,7 @@
 
 12 October 2026 · Reproducible context handoff
 
-The revised directions and handoff are committed in **`f4919cbcb5bde0ca011bb68180c8800c9772b894`**. Use that reviewed commit as the product baseline, even if `main` later changes. A new backend repo needs both a checked-in context snapshot and its own runtime/decision history; it cannot rely on the old chat being available.
+The revised directions and handoff were committed in `f4919cb`. The carryover baseline is **`9a7f369192aaa1be49eeff8535b24d2543be45b8`**, which also includes the subsequently reviewed green-concept/blue-practical component guides and artwork updates. Use that reviewed commit as the product baseline, even if `main` later changes. A new backend repo needs both a checked-in context snapshot and its own runtime/decision history; it cannot rely on the old chat being available.
 
 ## What carries over
 
@@ -37,7 +37,7 @@ From this Design-Thinking checkout, build the starter:
 
 ```sh
 python tools/prepare_backend_starter.py \
-  --source-revision f4919cbcb5bde0ca011bb68180c8800c9772b894 \
+  --source-revision 9a7f369192aaa1be49eeff8535b24d2543be45b8 \
   --output /tmp/kiki-backend-starter.zip
 ```
 
