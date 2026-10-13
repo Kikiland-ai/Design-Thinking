@@ -1,5 +1,9 @@
 # Repository agent instructions
 
+## Commit identity
+
+All new commits made for this user must use GitHub identity `arpanvihan5-sketch` (user id `317357476`). Before committing, configure this repository's `user.name` as `arpanvihan5-sketch` and `user.email` as `317357476+arpanvihan5-sketch@users.noreply.github.com`; verify both `git var GIT_AUTHOR_IDENT` and `git var GIT_COMMITTER_IDENT`. Do not inherit an unrelated image/global identity. Check the connected GitHub login through an available authenticated profile tool before pushing; author metadata alone does not establish which account is authenticated. Never inspect or print credential values to perform this check.
+
 ## BB8
 
 For consequential or multi-step work, read `bb8/AGENTS.md` and use

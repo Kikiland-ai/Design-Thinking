@@ -9,7 +9,7 @@ import zipfile
 
 ROOT = Path(__file__).resolve().parents[2]
 SCRIPT = ROOT / 'tools/prepare_backend_starter.py'
-REVISION = '9a7f369192aaa1be49eeff8535b24d2543be45b8'
+REVISION = '73d16c0d967a5d81dd74f1f28ef0defc48c8a778'
 
 
 class BackendStarterChecks(unittest.TestCase):
