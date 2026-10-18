@@ -1,0 +1,24 @@
+asset_id,priority,type,capture,deck_original_slides,video_snippet,evidence_condition
+S01,Required,Screenshot,Readable Odia lesson with an English technical term,3,03,Actual connected release and draft review labels retained
+S02,Required,Screenshot,Language dial and opened glossary with meaning and pronunciation support,5,03,Real change of authored display mode rather than generated text claim
+S03,Required,Screenshot,C-AM-08 phase scene at baseline and 60 or 90 degree relative error,5,04,Scene published through connected API and ideal teaching model identified
+S04,Required,Screenshot,Actual concept check result with one feedback item,11,05,Real earned result and earlier answers not fabricated
+S05,Required,Screenshot,Lab preparation prediction and theory-readiness state,6,06,Actual saved account state and pending checks remain honest
+S06,Required,Screenshot,Lab mode connection panel with sharing active,11,07,Main app controls sharing on actual production origin
+S07,Required,Screenshot,MATLAB workspace with floating current and next instructions,11,08,Actual bound release extension and real accepted backend guidance
+S08,Required,Video,Continuous student action through committed guide update,,08,Normal speed and actual integrated Gemini inference
+S09,Required,Video,Share picker launched from saved KiKi preparation,,07,Select same bound MATLAB browser tab with explicit user gesture
+S10,Required,Video,Actual baseline then local carrier phase fault and restoration,,09,Same real session or clearly labelled prepared session with no fabricated tracker advancement
+S11,Required,Screenshot,Saved observation visible after preparation reload,11,10,Real server saved record and external model saved separately
+S12,Supporting,Screenshot,Phone width lesson and term sheet,7,,Label browser viewport if no physical phone used
+S13,Supporting,Screenshot,Laptop lab layout with readable guidance,7,,Unique crop from implemented interface
+S14,Supporting,Screenshot,Cloud Run service revision with nonsecret deployment evidence,9,11,Actual submitted request path runs through service
+S15,Supporting,Screenshot,Firestore record projection with nonpersonal demo fields,9,11,Redact identity and no keys or private learner data
+S16,Supporting,Screenshot,Static Library upload history,5,,Do not imply automatic upload to lesson generation or original download
+S17,Required,Diagram,Student learning check lab and revision flow,6,,Match current readiness and assessment behavior
+S18,Required,Diagram,Actual deployed browser auth API Firestore Gemini and storage architecture,8,11,Cloud Run and durable store labels must match deployed implementation
+S19,Required,Chart,Median and p90 historical frame receipt to guidance latency,12,,Label 17 October separate-reader trial and scope
+S20,Required,Link evidence,Anonymous product repository video and extension download checks,14,,Verify after upload and preserve throughout evaluation
+S21,Required,Screenshot,Generic welcome framing with explicit Odia ECE demo label,3,01,Product audience broad and actual demo scope labelled separately
+S22,Supporting,Video,Additional language preference through actual matching content and audio,5,,Record only after complete validated language path works
+S23,Supporting,Video,Actual live mismatch or unknown finding followed by readable correction,12,08,Use accepted server evidence rather than invented assessment badges
