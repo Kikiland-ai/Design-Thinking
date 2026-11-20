@@ -1,43 +1,38 @@
 # Move backend work to Kikiland-ai/kiki-backend
 
-12 October 2026 · Reproducible context handoff
+Updated 20 November 2026 · Reproducible context handoff
 
-The revised directions and handoff were committed in `aeca76b`. The carryover baseline is **`73d16c0d967a5d81dd74f1f28ef0defc48c8a778`**, which also includes the subsequently reviewed green-concept/blue-practical component guides and artwork updates. Use that reviewed commit as the product baseline, even if `main` later changes. A new backend repo needs both a checked-in context snapshot and its own runtime/decision history; it cannot rely on the old chat being available.
+The 20 November scope decision restores KiKi’s focus on students entering STEM. For a new or explicitly refreshed snapshot, pin a reviewed Design-Thinking commit that includes the [scope cleanup ledger](plans/kiki-scope-cleanup.md), the [Analog Modulation case](../data-model/ANALOG-MODULATION.md), and the [phase-error tutor draft](prototypes/ece-phase-error/README.md). The starter's [active plan](https://github.com/Kikiland-ai/Design-Thinking/blob/main/tools/backend-starter/docs/plans/active.md) carries those decisions into the backend's `docs/plans/active.md`.
+
+The October starter used `73d16c0d967a5d81dd74f1f28ef0defc48c8a778` as its reviewed pin. That pin has the student journey and prototype proposals. A source refresh updates the recorded commit and its file hashes together while keeping backend decisions in the backend repo.
 
 ## What carries over
 
-The exporter copies committed product material at that exact SHA, preserving original relative paths under `context/design-thinking/`:
+The exporter copies committed product material at the chosen SHA and preserves original relative paths under `context/design-thinking/`.
 
-- Revised prototype proposal and handoff; latest student journey and Simulink recommendation.
+- Current scope record, student journey, Analog Modulation case, phase-error tutor draft, and Simulink recommendation.
+- October prototype proposal and handoff as implementation references.
 - Working docs, diagrams, original vision/architecture DOCX files, transcript, README, and handover.
 - Data-model types, subject profiles, worked ledgers, validator, migration tools, and clearly historical archives.
 - Design-system components/assets and the clickable prototype as implementation references. These support speech, graphics, annotation, and source-link inspection; they are not placed in the backend runtime.
 
-The complete supporting directories preserve working local links and scripts, while `context/README.md` labels current versus superseded sources. `context/KNOWN-GAPS.md` records the one pre-existing missing local UX reference and unverified capabilities. `SOURCE.json` records source repo/commit and per-file hashes. The source snapshot is a baseline, not an unreviewed rolling sync.
+The copied directories preserve relative links and scripts. `context/README.md` explains source precedence, `context/KNOWN-GAPS.md` records missing references and pending trials, and `SOURCE.json` records the exact Git commit and per-file hashes.
 
 At the new repo root, the bundle installs BB8, Codex/Claude wrappers, local marketplace metadata, validation CI, backend agent instructions, source-integrity CI/checker, runtime-version suggestions, `.env.example`, Firebase emulator configuration, and the first-session `SETUP.md`. BB8 native hosted installation is separate; no organization automation is assumed active.
 
 ## Create and import
 
-The attempted creation of the user's selected private `Kikiland-ai/kiki-backend` repo returned `Forbidden` through the current environment's GitHub CLI. The source repo push succeeded. Create the new **private, empty** repository in GitHub (no README/gitignore/license), or use an appropriately authorized local CLI:
+The October handoff logged a `Forbidden` response when creating `Kikiland-ai/kiki-backend` and `Repository not found` when pushing its local starter. Check the target repo's current state before using the empty-repo procedure. If a new private, empty repo is needed, an authorized user can create it in GitHub or run the following command.
 
 ```sh
 gh repo create Kikiland-ai/kiki-backend --private
 ```
 
-A committed local starter is already prepared at `/workspace/kiki-backend`; its initial push returned `Repository not found`. Once the empty remote is created and the environment identity has access, the short continuation is:
-
-```sh
-git -C /workspace/kiki-backend push -u origin main
-```
-
-For a different machine/environment, use the reproducible bundle/import steps below.
-
-From this Design-Thinking checkout, build the starter:
+From this Design-Thinking checkout, review the current committed `HEAD` for the scope, case and tutor files listed above, then build the starter using its exact SHA.
 
 ```sh
 python tools/prepare_backend_starter.py \
-  --source-revision 73d16c0d967a5d81dd74f1f28ef0defc48c8a778 \
+  --source-revision "$(git rev-parse HEAD)" \
   --output /tmp/kiki-backend-starter.zip
 ```
 
@@ -68,7 +63,7 @@ The scoped whitespace check checks newly authored starter files; copied BB8/prod
 
 Select **Kikiland-ai/kiki-backend**, branch **main**, and use its root as the workspace. The first session follows CONTEXT-BOOT.md: read core sources, report what was loaded or missing, and wait for the user's thoughts. It must not install, scaffold, configure, or start services automatically. Once the user requests implementation, provide Node 22, Python 3.12, Git, and Java 21 for emulators; after dependencies are locked, setup can use `npm ci` and the backend's declared checks. The starter itself has no npm lockfile or API yet.
 
-The later environment configuration starts with fixture modes and Firebase emulators. Attach real model/speech credentials through supported secrets/identity configuration when needed; they do not transfer from GitHub, files, or chat. Configure provider/download destinations using the supported network settings and preserve proxy/CA configuration. These are reference instructions, not context-boot actions. See [CONTEXT-BOOT.md](../tools/backend-starter/CONTEXT-BOOT.md) and [SETUP.md](../tools/backend-starter/SETUP.md) for the context-only prompt and later runtime guidance.
+The later environment configuration starts with fixture modes and Firebase emulators. Attach real model/speech credentials through supported secrets or identity configuration when needed. Configure provider/download destinations using the supported network settings and preserve proxy/CA configuration. The destination repo includes `CONTEXT-BOOT.md` for the first read-only session and `SETUP.md` for later runtime guidance. [Context boot template](https://github.com/Kikiland-ai/Design-Thinking/blob/main/tools/backend-starter/CONTEXT-BOOT.md) · [Setup template](https://github.com/Kikiland-ai/Design-Thinking/blob/main/tools/backend-starter/SETUP.md)
 
 Root instructions make the next agent read sources in order, reconcile older types with newer confirmed decisions, and maintain `docs/plans/active.md` plus backend decisions. Relevant docs are local and versioned; private live Claude links are not assumed available. The two immediate unverified capabilities remain actual mixed-language speech and actual Simulink observation/highlighting.
 

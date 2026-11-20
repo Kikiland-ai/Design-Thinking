@@ -1,6 +1,6 @@
-"""Self-check for personas/ece-phase-error (graph.json + routing-set.json).
+"""Self-check for the ECE phase-error graph and routing examples.
 
-Usage: py -3 -I validate_ece_graph.py <folder>
+Usage: python -I validate_ece_graph.py <folder>
 Exits 1 on any error. Warnings do not fail the run.
 """
 import json

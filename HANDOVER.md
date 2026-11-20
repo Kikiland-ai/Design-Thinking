@@ -1,12 +1,8 @@
 # Handover: Google AI Builder Cup project
 
-Last updated: 11 October 2026, late (Day 3 of the 10-day build; submission on 18 October). Latest sessions: generalised the data model (v2), specified every screen in a new "Student journey" tab, and redrew Kiki as a Clicky-style companion-cursor guide.
+October design handoff, recorded 11 October 2026. The notes below describe the rectifier-era demo, its design assets, and the build suggestions from that session.
 
-Repository: https://github.com/Kikiland-ai/Design-Thinking (private). The project folder is the git working copy; `main` holds everything below. Start with `README.md` for the map of the repo.
-
-To continue in a new Claude session, clone the repo (or open the project folder) and paste:
-
-> Read HANDOVER.md in this folder, then the working doc (live link below, or its markdown copy in `docs/working-doc/`) and the design system it links to. We're continuing the AI Builder Cup project from where the last session stopped. Start with the "Next steps" section.
+For current work, start with the [README](README.md), then open the [Odia ECE student journey](docs/ux/student-journey-odia-ece.md) and [Analog Modulation case](data-model/ANALOG-MODULATION.md). The [scope cleanup ledger](docs/plans/kiki-scope-cleanup.md) records the 20 November decision to focus the hackathon on helping students enter STEM.
 
 ---
 
@@ -14,7 +10,7 @@ To continue in a new Claude session, clone the repo (or open the project folder)
 
 A bilingual (Odia–English) adaptive learning app for first-year engineering students who studied in Odia medium up to Class 12 and now face English-medium engineering. It teaches each concept in a student-controlled mix of Odia and English, keeps English technical terms stable, and judges **concept understanding and English expression separately**, so a student learns their marks were lost to language, not intelligence. Built on Gemini and Google Cloud for the Google AI Builder Cup. The demo is one branch (Electronics) and one chapter ("Diodes and rectifiers").
 
-## 2. Decisions locked (don't re-open without the user)
+## 2. Decisions recorded in the October handoff
 
 | Topic | Decision |
 | --- | --- |
@@ -102,7 +98,7 @@ Voice, camera and sign-in are simulated. The full path was click-tested headless
 - Contrast-checked text shades: yellow-ink `#9A5500`, green-ink `#137333`, red-strong `#C5221F` for "owned" fills.
 - **All Odia text is placeholder** and needs a native speaker's review. Past-paper weights in the ledger are sample values.
 
-## 5. Next steps (suggested order)
+## 5. October build suggestions
 
 0a. **Build a `KikiGuide` component** that draws the route marks (halo, step badges, dashed path ahead, rails beside lines) around `KikiPointer`, and use it in the prototype's lesson and lab screens.
 0. **Confirm the 11 decisions** at the end of the Student journey tab (four tabs Today/Map/Practice/Me, one Kiki door, skippable onboarding, one Explain beat with three modes, and so on). Then update the clickable demo: its nav is still Map/Stickers/Me and its lesson still has separate "Kiki explains" and "Learn" beats.

@@ -173,10 +173,10 @@ Browser-based MATLAB/Simulink is the confirmed initial lab direction; desktop-ap
 
 ## References and next action
 
-Sources used: the user's current clarification; [UX working document](../../../UX%20Working%20Doc%20%E2%80%94%20Bilingual%20STEM%20Learning%20%28AI%20Builder%20Cup%29.md); [product vision](../../AI_Builder_Cup_Product_Vision.docx); [design asset/component guidance](../../design-system/project/README.md). No earlier phase specifications were used.
+This journey draws on the user's clarification, the UX working document, the original product vision, and design component guidance. The original UX working document was external to the repository. The checked-in export provides related background. [UX working doc export](../working-doc/01-ux-working-doc.md) · [Product vision](../../AI_Builder_Cup_Product_Vision.docx) · [Design guidance](../../design-system/project/README.md)
 
 BB8 and experience-design were applied as local reference guidance. Package validation passed; native plugin registration was not tested. The linked GitHub organisation currently exposes no public repositories, so the available local checkout supplied the references. [GitHub organisation](https://github.com/Kikiland-ai).
 
 **Last completed action:** added the agreed lab prerequisite rule, top-right Lab mode entry, parallel tracking page, and Hey Clickky 2.0 activation sequence; researched and documented a medium-difficulty experiment recommendation.
 
-**Exact next action:** confirm the recommended experiment and trial its model, tool access, and guidance checkpoints in MATLAB/Simulink Online; begin UI layouts with the agreed tracker and activation states.
+The worked chapter and tutor draft are available for review. The proposed Simulink lab still needs an experiment, tool access, and guidance trial using the agreed tracker and activation states. [Analog Modulation case](../../data-model/ANALOG-MODULATION.md) · [Phase-error tutor draft](../prototypes/ece-phase-error/README.md) · [Simulink lab recommendation](experiment-recommendation-simulink.md)

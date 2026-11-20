@@ -1,34 +1,32 @@
 # Kikiland · Design Thinking
 
-The design work for a bilingual (Odia–English) adaptive learning app for first-year engineering students who studied in Odia medium up to Class 12. It teaches every concept in a student-controlled mix of Odia and English, keeps technical terms in English, and marks **the idea and the English separately**, so a student can see when marks were lost to language rather than understanding. Built on Gemini and Google Cloud for the **Google AI Builder Cup** (submission 18 October 2026).
+KiKi helps students overcome language barriers to entering STEM. The first audience is first-year engineering students who studied in Odia medium up to Class 12. KiKi teaches concepts in a student-controlled mix of Odia and English, keeps technical terms in English, and assesses concept understanding and English expression separately.
 
 Kiki, the helper, is a companion cursor: it flies to the right part of the student's screen and shows the route one step at a time.
 
 ![Kiki guides the series-or-parallel question in four moves](design-system/project/assets/Kiki/kiki-guide-storyboard.svg)
 
-## Status
+## Current hackathon focus
 
-Day 3 of a 10-day build. The design phase is done; building has not started.
+The team returned to the original STEM focus on 20 November 2026. The second mentor reinforced the choice to serve a specific student audience with a problem KiKi can solve and demonstrate. The decision and its file history are in the [scope cleanup ledger](docs/plans/kiki-scope-cleanup.md).
+
+The current design case follows an Odia-speaking ECE student through Analog Modulation, with a draft phase-error tutor and a proposed DSB-SC lab in Simulink Online. The original rectifier prototype remains a clickable design reference.
 
 | Area | State |
 | --- | --- |
-| UX working doc | Done: decisions, onboarding, day-to-day loop, impact plan, UI direction |
-| Student journey | Done: 15 modules, every screen, button and state; 11 decisions awaiting team confirmation |
-| Feature specs | Done: 31 features, 17 demo-critical |
-| Build plan | Done: roadmap with 4 gates, 58 tasks, demo script, risks |
-| Data model | Done (v2): any subject, any scope, any input; 3 worked ledgers validated |
-| Design system ("Breadboard") | Done: tokens, 25 React components, Kiki guide artwork |
-| Clickable demo | Done for the original flow (21 screens); not yet updated to the latest journey decisions |
-| App build | Not started |
+| Student journey | Confirmed language, assessment, and lab activation decisions |
+| Analog Modulation | Chapter ledger and bilingual learning case are in the repo. Instructional content awaits review. |
+| Phase-error tutor | The graph and routing examples pass structural checks. Native Odia review, ECE teacher review, and live app verification are pending. |
+| Simulink Online | DSB-SC is the proposed lab. Tool access, model execution, and live guidance still need a trial. |
 
 ## What's in this repo
 
 | Path | What it is |
 | --- | --- |
-| [`HANDOVER.md`](HANDOVER.md) | **Start here.** Everything needed to pick the project up: decisions, links, ids, procedures, next steps |
-| [`docs/working-doc/`](docs/working-doc/) | Markdown copy of the five-tab working doc (the live doc is the source of truth) |
+| [`HANDOVER.md`](HANDOVER.md) | October design handoff and background references |
+| [`docs/working-doc/`](docs/working-doc/) | October exports of the five-tab working doc |
 | [`docs/diagrams/`](docs/diagrams/) | The working doc's diagrams as PNGs |
-| [`data-model/`](data-model/) | Data model v2: TypeScript types, subject profiles, three worked ledgers, validator and tests ([README](data-model/README.md)) |
+| [`data-model/`](data-model/) | Data model v2, subject profiles, four worked ledgers, validator and tests ([README](data-model/README.md)) |
 | [`design-system/`](design-system/) | The Breadboard design system: `project/` (tokens, components, Kiki assets), `tools/build-kiki.js`, and the archived first Kiki set |
 | [`prototype/`](prototype/) | The clickable mobile demo (`index.html`) and the Claude Design prompt |
 | `AI_Builder_Cup_*.docx`, `Audio Transcript.txt` | The original inputs: product vision, technical architecture, team call |
@@ -36,17 +34,14 @@ Day 3 of a 10-day build. The design phase is done; building has not started.
 
 ### Reading order
 
-1. [`HANDOVER.md`](HANDOVER.md)
-2. [UX working doc](docs/working-doc/01-ux-working-doc.md): the product decisions and the core loop
-3. [Student journey](docs/working-doc/02-student-journey.md): every screen, from the first page on
-4. [Feature journeys](docs/working-doc/03-feature-journeys.md): the 31 features as buildable specs
-5. [Build plan](docs/working-doc/04-build-plan.md): the 10-day plan and the demo script
-6. [Data model](docs/working-doc/05-data-model.md), then [`data-model/README.md`](data-model/README.md)
-7. [`design-system/project/README.md`](design-system/project/README.md): the brand book
+1. [Odia ECE student journey](docs/ux/student-journey-odia-ece.md) for the confirmed learner flow.
+2. [Analog Modulation learning case](data-model/ANALOG-MODULATION.md) for the lesson, assessments, and lab checkpoints.
+3. [Phase-error tutor draft](docs/prototypes/ece-phase-error/README.md) and [Simulink lab recommendation](docs/ux/experiment-recommendation-simulink.md) for the worked example and open reviews.
+4. [Backend source handoff](docs/backend-repo-setup.md) for the pinned context bundle and the starter’s `docs/plans/active.md`.
 
 ## Running things
 
-Everything runs with Node 18 or later and a browser. There are no dependencies to install.
+The original demo runs in a browser, and the ledger and artwork scripts use Node 18 or later. The tutor validator uses Python.
 
 ```sh
 # Validate every lesson ledger, plus the cross-ledger checks
@@ -54,6 +49,9 @@ node data-model/validate.js data-model/ledgers
 
 # Seed 13 known errors and check the validator catches each one
 node data-model/tools/test-validator.js
+
+# Validate the ECE phase-error tutor draft
+python -I docs/prototypes/ece-phase-error/validate_ece_graph.py docs/prototypes/ece-phase-error
 
 # Regenerate Kiki's guide artwork (design-system/project/assets/Kiki/)
 node design-system/tools/build-kiki.js
@@ -67,11 +65,11 @@ node data-model/tools/migrate-v1-to-v2.js data-model/archive-v1/diodes-and-recti
 ## Key decisions
 
 - **Odia first, student in control.** A five-notch language dial that only the student moves; Kiki may suggest a notch.
-- **Colour is a skill.** Blue concept, red technical words, yellow exam English, green lab. Red never means wrong.
+- **Each colour represents a skill.** Green for concepts, red for technical words, yellow for academic English, and blue for practical application.
 - **The X factor.** The student writes exam answers on paper and snaps them. Gemini reads the handwriting and marks the idea and the English separately, then builds a repair map of fixes.
 - **The student's material comes first.** Their notes and syllabus are the first source of truth; curated content fills the gaps.
-- **Any subject, any input.** One lesson pyramid holds a chapter, a topic or a single question. Every input (question, notes, syllabus, past paper, experiment sheet) comes through one Kiki door and is matched before anything new is generated.
-- **Demo scope.** Electronics, chapter "Diodes and rectifiers", with a browser half-wave rectifier lab.
+- **Reusable lesson model.** One lesson pyramid holds a chapter, a topic or a single question. KiKi matches a student's material before generating new content.
+- **Progression and lab entry.** Concept checks require 60% and chapter tests 80%. Lab execution requires passing only the checks for the experiment's prerequisite concepts. The pointer activates after the student opens the software and the guidance connection is confirmed.
 
 ## Diagrams
 

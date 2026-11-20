@@ -1,6 +1,6 @@
 # Data model v2: any subject, any scope, anything a student brings
 
-The model no longer assumes Electronics, Odia, a circuit lab or a full chapter. A student can bring a syllabus, a chapter name, one question, a photo of a textbook page, a professor's notes, a past paper or an experiment sheet. Every input becomes a `StudyRequest`. It is matched against what already exists, and anything new is generated into the same validated lesson pyramid. The diode chapter is now one of three worked examples.
+The model supports different subjects, languages and lesson scopes. A student can bring a syllabus, a chapter name, one question, a photo of a textbook page, a professor's notes, a past paper or an experiment sheet. Every input becomes a `StudyRequest`. It is matched against what already exists, and anything new is generated into the same validated lesson pyramid. Start with the [Analog Modulation case](ANALOG-MODULATION.md) for the current Odia ECE example.
 
 | File | What it holds |
 | --- | --- |
@@ -8,7 +8,7 @@ The model no longer assumes Electronics, Odia, a circuit lab or a full chapter. 
 | `types/intake.ts` | StudyRequest, SourceDoc, Resolution, OutlineProposal, GenerationJob, SmartLink |
 | `types/learner.ts` | Learner, goals, route, concept state (four rings), attempts and diagnosis, practice sets, handwriting marking, repair plans, receipts, word stickers, practical runs, classes and class pulse |
 | `subject-profiles.json` | The only place subject rules live: practical label and kinds, visual kinds, interactive kinds, check mix, whether units matter, fault-card wording |
-| `ledgers/` | Three worked ledgers (below) |
+| `ledgers/` | Four worked ledgers (below) |
 | `validate.js` | Generic validator; run it on a file or a folder |
 | `tools/migrate-v1-to-v2.js` | Converts a v1 ledger, with the content fixes the new validator found |
 | `tools/test-validator.js` | Seeds 13 known errors and checks each is caught |
@@ -33,15 +33,16 @@ The model no longer assumes Electronics, Odia, a circuit lab or a full chapter. 
 | No review state | `review.status`: draft, auto_checked ("Kiki-made" label), teacher_checked, flagged |
 | No learner, practice or repair data | `types/learner.ts` |
 
-## The three worked ledgers
+## Worked ledgers
 
 | Ledger | Subject | Scope | Came from | Shows |
 | --- | --- | --- | --- | --- |
+| `electronics/analog-modulation.json` | Analog Communication | chapter: 4 broad concepts, 10 concepts | Curated for the Odia ECE case | Bilingual learning case, coherent demodulation, and a proposed DSB-SC lab |
 | `electronics/diodes-and-rectifiers.json` | Electronics | chapter: 4 broad concepts, 12 concepts | Curated, from the v1 ledger | Simulation practical with three fault cards, two parameter sweeps, a bridge to Class 12 semiconductor basics |
 | `chemical/steady-state-material-balances.json` | Chemical Engineering | topic: 1 broad concept, 2 concepts | A professor's notes (SourceRefs to pages) | Physical lab, a sort-steps interactive, exam signal computed from two sample past papers |
 | `mathematics/eigenvalues-from-a-question.json` | Engineering Mathematics | concept: 1 and 1 | One typed question in a self course | No practical (three-ring subject), no syllabus (bounded by the request), step-through interactive |
 
-All three pass `validate.js` and type-check against `Ledger` (`satisfies Ledger` under `tsc --strict`).
+All four pass `validate.js`. The three original v2 examples also type-checked against `Ledger` (`satisfies Ledger` under `tsc --strict`).
 
 ## Running it
 

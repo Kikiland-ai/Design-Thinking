@@ -2,9 +2,9 @@
 
 This is the authored data package for the selected case, extending `lesson-ledger/v2`. It includes teaching content and domain contracts; it does not include a running backend, rendered illustrations, a Simulink `.slx` model, or a live pointer adapter.
 
-**Start here:** [chapter ledger](ledgers/electronics/analog-modulation.json) for canonical content; [Odia learning case](cases/analog-modulation-odia.json) for bilingual presentation, assessments, lab configuration, and synthetic examples.
+The [chapter ledger](ledgers/electronics/analog-modulation.json) holds canonical content. The [Odia learning case](cases/analog-modulation-odia.json) adds bilingual presentation, assessments, lab configuration, and synthetic examples. The [phase-error tutor draft](../docs/prototypes/ece-phase-error/README.md) builds on `C-AM-08` and leads into lab checkpoint `CP-DSB-11`.
 
-**Repository availability — 13 October 2026:** this documentation-only commit contains `ANALOG-MODULATION.md` and `ANALOG-MODULATION-PLAN.md`. The new JSON datasets, case types, helpers and validation tools described below remain local and uncommitted; their new-file links will not resolve in a clean checkout until that package is committed separately. Existing content types/subject-profile additions are also local. Validation results below describe the authored local package, not a fully published data release.
+**Repository availability.** Commit `2a6c843` added both JSON files. The case-specific types, policy helpers, and test tools described in the [October preparation plan](ANALOG-MODULATION-PLAN.md) are still outside this checkout. The available checks are listed below.
 
 ## What is prepared
 
@@ -118,33 +118,23 @@ Retain existing content collections: `courses`, `subjectProfiles`, `lessonPlans`
 
 Keep personal data under `learners/{id}/quizRuns`, `conceptStates`, and `labSessions`; evidence/observations can be session subcollections. Uploaded and captured media use owner-scoped asset references. Handoffs are owner-scoped, expiring, server-processed records.
 
-Never import `seeds` into public content. Replace demo learner/device/project ids for real sessions. Construct the server actor from verified authentication, validate incoming payloads, and persist revision transitions atomically. Included runtime functions implement pure policy, not the database/authentication/screen adapters.
+Never import `seeds` into public content. Replace demo learner/device/project ids for real sessions. Construct the server actor from verified authentication, validate incoming payloads, and persist revision transitions atomically. The policy and adapter interfaces in this section describe the intended runtime.
 
 ## Files and verification
 
 | File | Responsibility |
 |---|---|
-| `types/learning-case.ts` | Bilingual content, assessments, checkpoints, evidence, sessions, handoff |
-| `ledgers/electronics/analog-modulation.json` | Existing v2-compatible chapter |
-| `cases/analog-modulation-odia.json` | Bilingual content, policies, model specification, synthetic fixtures |
-| `runtime/learning-case.js` | Pure scoring, readiness, activation, evidence filtering, handoff |
-| `validate-case.js` | References, coverage, policies and fixtures |
-| `tools/test-learning-case.js` | Boundary, isolation, activation, handoff, numerical tests |
-| `tools/typecheck-learning-case.js` | Strict literal-data type checking using temporary files |
+| [Analog Modulation ledger](ledgers/electronics/analog-modulation.json) | V2-compatible chapter |
+| [Odia learning case](cases/analog-modulation-odia.json) | Bilingual content, policies, model specification, synthetic fixtures |
 
 Run from the repository root:
 
 ```sh
 node data-model/validate.js data-model/ledgers
-node data-model/validate-case.js
 node data-model/tools/test-validator.js
-node --test data-model/tools/test-learning-case.js
-npm exec --yes --package=typescript@5.9.3 -- node data-model/tools/typecheck-learning-case.js
 ```
 
-TypeScript runs in a temporary tool environment without adding a repository dependency or generated source files.
-
-**Python backend:** the backend language is Python, confirmed on 13 October. The JSON content/IDs/policies remain portable. Treat TypeScript types and JavaScript policy helpers as reference contracts; implement Python validation/scoring/session policy and verify them against the same JSON cases. The web UI remains React/TypeScript. This documentation commit does not include that Python implementation.
+**Backend handoff.** The October plan records a Python implementation for validation, scoring, and session policy, with React and TypeScript on the web. The JSON content, identifiers, and policies remain portable across both. [Backend context setup](../docs/backend-repo-setup.md)
 
 ## Review and next step
 

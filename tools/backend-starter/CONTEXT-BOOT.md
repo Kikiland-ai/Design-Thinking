@@ -6,15 +6,15 @@ The first task in a new session is to establish the right project context and th
 
 1. `AGENTS.md`, `SETUP.md`, and this file: current session scope and operating rules.
 2. `context/README.md`, `context/KNOWN-GAPS.md`, and `context/design-thinking/SOURCE.json`: source precedence, unavailable references, and the exact imported revision. The manifest inventories files; it does not mean their contents have been read.
-3. `docs/plans/active.md`: actual completed work, pending capabilities, and the user's current pause before implementation.
-4. `context/design-thinking/docs/ux/student-journey-odia-ece.md`: latest confirmed product decisions; then `docs/ux/experiment-recommendation-simulink.md` within the same snapshot for the proposed lab and its open trial.
+3. [Active plan](docs/plans/active.md) for the current STEM scope, completed work, pending reviews, and first-session boundary.
+4. Within `context/design-thinking/`, read `docs/plans/kiki-scope-cleanup.md` for the scope decision when present. Read `docs/ux/student-journey-odia-ece.md` for the confirmed learner flow. Use `data-model/ANALOG-MODULATION.md` and `docs/prototypes/ece-phase-error/README.md` when present, then `docs/ux/experiment-recommendation-simulink.md` for the proposed lab and its trial. Report files absent from an older pin.
 5. `context/design-thinking/docs/prototypes/backend-prototype-directions.md` and `docs/plans/backend-prototype-handoff.md` within that snapshot: the revised seven directions and their reasoning. Their suggested build order is background, not permission to execute.
 6. `context/design-thinking/data-model/README.md` and `types/content.ts`, `types/intake.ts`, `types/learner.ts` within that data-model directory: reusable contracts and reconciliation needs.
 7. The original `AI_Builder_Cup_Product_Vision.docx` and `AI_Builder_Cup_Technical_Architecture.docx` in `context/design-thinking/`: purpose, intended agent/workflow boundaries, and initial constraints. Extract readable text with available file tools; if unavailable, report that rather than claiming to have read them.
 
 Use supporting working-doc sections, transcript passages, and component/ledger sources only as needed to resolve something in the core context. Do not automatically read every historical screen, asset, or archived document. The source index points to the right materials without treating all 130 files as equally current.
 
-Apply source precedence from `context/README.md`: current user instructions and agreed backend decisions first, then the latest confirmed journey, then the proposed directions, with older documents and demo code as supporting references. Identify an unresolved conflict rather than silently inventing a decision. Technical stack and module recommendations remain proposals until the user chooses how to proceed.
+Apply the [source precedence](context/README.md). Use current user instructions and agreed decisions first, then the active scope and confirmed journey. Use the prototype directions and original demo as references. Report any unresolved decision before proceeding. Technical stack and module recommendations remain proposals until the user chooses how to proceed.
 
 ## Verify without starting work
 

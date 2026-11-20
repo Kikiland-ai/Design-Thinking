@@ -1,12 +1,12 @@
 # Known source and capability gaps
 
-## One pre-existing missing local reference
+## Earlier source reference
 
-The imported `design-thinking/docs/ux/student-journey-odia-ece.md` links to:
+The October pin of `design-thinking/docs/ux/student-journey-odia-ece.md` links to:
 
 `../../../UX Working Doc — Bilingual STEM Learning (AI Builder Cup).md`
 
-That file was not in the Design-Thinking checkout or pinned commit; its link already pointed outside the source repository. It cannot be carried over as an available source. The five local exports in `design-thinking/docs/working-doc/` and the latest `docs/ux/` journey remain available. They are not silently represented as the missing file. Ask the project owner for that source only if its contents become necessary.
+That file was outside the Design-Thinking repository. The latest journey points to the checked-in working doc export for background and still identifies the original as an external source. Older pins retain the original link.
 
 Private live Claude artifacts are referenced but were not retrieved. Their URLs are not imported document contents. The source snapshot preserves all working relative links; it does not invent files for inaccessible references.
 

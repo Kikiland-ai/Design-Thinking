@@ -6,6 +6,8 @@ Last updated: 2026-10-12
 
 Current phase: Incorporate speech, graphics, and two annotation uses
 
+This is the October proposal handoff. Start current work from the revised scope and Odia ECE case. [Current scope](kiki-scope-cleanup.md) · [Analog Modulation case](../../data-model/ANALOG-MODULATION.md)
+
 ## TL;DR
 
 - **Objective:** give seven complete product prototype directions for a separate backend repo, including mixed-language TTS, generated GIF diagrams, and annotation/writing on images and live screens.

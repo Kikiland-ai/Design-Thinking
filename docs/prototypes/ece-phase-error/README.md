@@ -1,8 +1,10 @@
 # ECE tutor graph: phase error in a coherent receiver
 
-Draft v0 · 20 Nov 2026 · S5 persona studio · For review at 09:30 · Files: [graph.json](graph.json) (`kiki-tutor-graph/v0`), [routing-set.json](routing-set.json)
+Draft v0 · 20 Nov 2026 · [Tutor graph](graph.json) (`kiki-tutor-graph/v0`) · [Routing examples](routing-set.json)
 
 > **Machine draft.** All Odia (`or`) text is a machine draft. A native Odia speaker must review it before it is shown as reviewed. An ECE teacher has not checked the content yet. `caseData.review` carries this state.
+
+The tutoring exercise builds on concept `C-AM-08` and lab checkpoint `CP-DSB-11` in the [Analog Modulation learning case](../../../data-model/ANALOG-MODULATION.md).
 
 ## The problem
 
@@ -13,7 +15,7 @@ What the course content changed in the brief's framing:
 - **Fraction of the aligned amplitude, after recovery gain 2.** The course states recovery as "ideal gain-corrected … m(t)*cos(phi)" with matched frequency and unit carriers (ledger C-AM-06 and C-AM-08, worked question W-AM-08). The filter alone gives ½ m(t) cos φ, and KiKi says so, so "a quarter" never comes up.
 - **90° is "the ideal message vanishes", not "nothing at all".** The course's own C-AM-08 misconception (M-AM-08, check Q-AM-08-4) is that a finite filter can leave ripple. `show-90` says so.
 - **Angles are in radians in the lab.** The transmitter carrier Phase is pi/2, and the fault sets the Local carrier Phase to pi (a 90° relative error; fault F-AM-PHASE, checkpoint CP-DSB-11). C-AM-01 asks which shift is a quarter cycle (pi/2). This grounds the angle-units misconception.
-- **Misconceptions (contract cap 2–3).** `phase-does-not-matter` (C-AM-06 misconception M-AM-06; distractor "1" in Q-AM-08-1), `any-error-loses-all` (M-AM-06's correction: mismatch "reduces or changes" the message) and `angle-unit-mixup` (C-AM-01). The course never mentions a linear falloff, so a linear guess routes to `unclear`, and the calc-60 nudge covers it.
+- **Misconceptions.** `phase-does-not-matter` (C-AM-06 misconception M-AM-06; distractor "1" in Q-AM-08-1), `any-error-loses-all` (M-AM-06's correction: mismatch "reduces or changes" the message) and `angle-unit-mixup` (C-AM-01). A linear guess routes to `unclear`, and the calc-60 nudge covers it.
 - **Term forms:** coherent demodulation, local oscillator (the lab block is "Local carrier"), lowpass filter, recovery gain, phase error.
 
 ## Path
@@ -49,7 +51,7 @@ Every probe also has `unclear` (the next hint rung: question, nudge, worked step
 | explain-english | clear-explanation `ok`; partial-explanation `partial` → articulation (english) | recap |
 | any free-text turn | `expression.termsUsed` → terms (words); `expression.clarity` on English or mixed replies → articulation (english) | none |
 
-No branch maps to `terms`, by design. S3 matches `termsUsed` against `caseData.targetTerms`. Chip replies should earn no words or English evidence.
+The proposed tutor runtime matches `termsUsed` against `caseData.targetTerms` on free-text replies. Chip replies earn no vocabulary or English-expression evidence.
 
 ## Canvas: real names used
 
@@ -57,9 +59,9 @@ No branch maps to `terms`, by design. S3 matches `termsUsed` against `caseData.t
 
 **Props (kiki-web).**
 
-- `PhaseRecoveryScene({ scene })` takes only `scene` today. The angle is local state `phi`, seeded from `scene.controls[0].default`: `apps/web/src/features/learning/PhaseRecoveryScene.tsx:12-14`. S1's new optional prop must accept `{ phi }` plus highlight targets.
+- In the source snapshot used for this draft, `PhaseRecoveryScene({ scene })` takes only `scene`. The angle is local state `phi`, seeded from `scene.controls[0].default` in `apps/web/src/features/learning/PhaseRecoveryScene.tsx:12-14`. The proposed control prop takes `{ phi }`, highlight targets, hidden elements and a lock flag.
 - The artifact's control is **`phi`**: unit `degree`, 0–180, step 15, default 60. The output is `fraction` ("Signed recovery fraction"), and `comparisonDegrees` is [0, 60, 90]. Sources: `apps/web/src/fixtures/concept-media-C-AM-08.json:328-344`; schema `apps/web/src/contracts/concept-media.ts:35-46`; maths `recoveryFraction(phiDegrees)` = cos(φ·π/180) in `features/learning/phase-math.ts:4`.
-- The name is not `phaseDeg`, which is only the example in contract §2 and the build plan. It is also not `phase`, which is the C-AM-08 control in the preserved CamCanvas contract (`data-model/media/cam-contract/policies.json`). The C-AM-08 manifest does not use that contract.
+- The scene takes `phi` in degrees. The separate CamCanvas contract uses `phase` (`data-model/media/cam-contract/policies.json`).
 
 **Targets** for `highlight`, `hide` and `annotate.target`. Walkthrough targets are kept verbatim (with spaces) from `kiki-web/data-model/media/cam-contract/scenes.json` → `C-AM-08.scene.walkthrough`.
 
@@ -72,20 +74,27 @@ No branch maps to `terms`, by design. S3 matches `termsUsed` against `caseData.t
 | `Carrier mismatch` | walkthrough (words, sweep) | the whole scene |
 | `comparison-presets` | **proposed id, does not exist yet** | the preset button group, :41 |
 
-**States** (StatePatch, all `values: { phi }`): `aligned` φ 0, presets hidden · `phi-60-trace` φ 60, readout and presets hidden · `phi-60` φ 60, readout shown · `phi-90` φ 90 · `recap` φ 60 with the `Carrier mismatch` sweep. **Why `hide`:** the scene prints the answers. The preset buttons show "cos = 0.50" and "cos = 0.00", and the readout and aria text state the fraction. If S1's prop ignores `hide`, the graph still runs, but calc-60 and predict-90 get easier. Each node's canvas replaces the previous one, annotations included. A node without a canvas keeps the current scene.
+**States** use `values: { phi }`. `aligned` sets φ to 0 and hides the presets. `phi-60-trace` sets φ to 60 and hides the readout and presets. `phi-60` sets φ to 60 and shows the readout. `phi-90` sets φ to 90. `recap` sets φ to 60 with the `Carrier mismatch` sweep. The `hide` list keeps the answers out of the preset buttons, readout and accessible text during relevant probes. Each node's canvas replaces the previous one, annotations included. A node without a canvas keeps the current scene.
 
-## Contract notes for the hub
+## Draft integration notes
 
-1. **P1, additive:** add `states?: Record<string, StatePatch>` to the `ece` scene variant. `TutorNode.canvas.state` is a string and has no `highlight`, so the values and highlights live in named states. The alternative is to widen `canvas.state` to `string | Record<…>`, as in `Cue.scene.state`.
-2. **P2, additive:** add `route?: string` to chips, naming the label a chip maps to. Chips then route without a model call (the 19:00 cut line). The "Use a model sentence" chip routes to `partial-explanation` because the learner did not write it.
-3. **P3, fix:** change `{ phaseDeg: 60 }` in §2 to `{ phi: 60 }`.
-4. A forced advance after the fourth hint should follow the first `expect`. Each probe lists its `ok` branch first.
+- The draft uses named `states` on the `ece` scene. `TutorNode.canvas.state` names a state containing `phi`, highlights and hidden elements. Lock the scene controls during probes and unlock them after the conclusion. The preset button group needs a `comparison-presets` target.
+- A chip with `route` goes directly to that label. The "Use a model sentence" chip routes to `partial-explanation` because the learner did not write the sentence.
+- After the fourth hint, advance through the first `expect` branch and record `not_yet`. Each probe lists its `ok` branch first.
+- Start at `predict-60` when a student enters after missing `Q-AM-08-1` or `Q-AM-08-2`. The entry line is “You missed a phase question. Let's talk it through.”
+- The scorecard always suggests lab checkpoint `CP-DSB-11`. It suggests `C-AM-06` when conceptual understanding is `not_yet` and `C-AM-01` when the `angle-unit-mixup` label occurs. The `nextSteps` explanations still need Odia copy.
+
+The API bundle location and live app integration need verification. The prior interface proposal is available in Git history. [Tutor mode contract](https://github.com/Kikiland-ai/Design-Thinking/blob/45180af3f589bfdb11711766a4f8fbbc339a8ce9/docs/knowledge-workers/05-contracts-v0.md#4-tutor-mode)
 
 ## Routing set
 
 20 replies over 5 probes (5/4/4/4/3). Every expect id appears at least once. Each misconception appears twice, `unclear` three times and `off_topic` twice. By language: en 9; or 6 (4 in Odia script, 2 romanised); mixed 5 (romanised, code-mixed). Here `or` means Odia with English technical terms, as the app writes it; `mixed` means switching beyond the terms. Three replies test router discipline: a time-shift idea at why-cos (`unclear`), a linear guess at calc-60 (`unclear`), and a ripple caveat at predict-90 (still `vanishes`).
 
-Self-check run before handover: JSON parses; ids unique; every `next` exists; all nodes reachable; no cycles, so every path ends at the conclusion; each probe has expect, 4 hints and 2–4 chips; chip routes and routing labels are valid for their node; at most 2 sentences per line.
+Run the structural check from the repository root. It checks graph reachability, branch references, hint and chip structure, and routing examples.
+
+```sh
+python -I docs/prototypes/ece-phase-error/validate_ece_graph.py docs/prototypes/ece-phase-error
+```
 
 ## Review checklists
 
@@ -106,26 +115,3 @@ Self-check run before handover: JSON parses; ids unique; every `next` exists; al
 - [ ] The three misconceptions are realistic. Is it fine to leave linear falloff to the hint ladder?
 - [ ] No hint rung gives the answer too early.
 - [ ] The `ok` bar for explain-english: reason plus result, with at least two course terms.
-
-## Hub decisions (20 Nov, 03:55 IST)
-
-| Question | Decision |
-|---|---|
-| P1: named `states` on the `ece` scene | **Accepted.** Added to contract §3 |
-| P2: `route` on chips | **Accepted.** Chips with a `route` skip the model call and earn no words or expression evidence (contract §4) |
-| P3: `phaseDeg` → `phi` | **Fixed** in contract §2, the build plan and the S1 brief |
-| Forced advance after the fourth hint | **Accepted:** advance through the first `expect`, recording `not_yet` (contract §4) |
-| Can S1's prop `hide`? Lock during probes? | **Yes, both.** S1 adds `data-testid="comparison-presets"`, supports `hide`, and adds a `locked` flag. S2 locks the scene during every probe and unlocks it after the conclusion |
-| Entry from a missed check question | **Start at `predict-60`.** The full five-turn arc is the demo. S2 shows one context line: "You missed a phase question. Let's talk it through." |
-| Scorecard next steps | **`nextSteps` added** to the graph format and to `graph.json`: lab CP-DSB-11 always; C-AM-06 when conceptual understanding is `not_yet`; C-AM-01 when `angle-unit-mixup` fired. English only for now; **add Odia `why` lines at the review** |
-| Linear falloff as a fourth misconception | Not now. The hint ladder covers it; revisit after the demo |
-| Bundled path in `apps/api` | S3 chooses the package path and reports it at 13:00 |
-
-## Open questions (original, answered above)
-
-1. Hub: accept P1–P3?
-2. S1: can the 13:00 prop support `hide`? Should the slider and presets lock during a probe?
-3. When entry comes from a missed check (Q-AM-08-1 or Q-AM-08-2), start at predict-60 or skip to why-cos?
-4. If the cap rises to 4, add linear falloff as a fourth misconception. It needs one show node (φ 45° → 0.71).
-5. The graph schema has no field for scorecard next steps. Suggested: lab `CP-DSB-11` always; concept `C-AM-06` if conceptual-understanding is `not_yet`; concept `C-AM-01` if angle-unit-mixup fired.
-6. Graphs ship bundled with the API (contract update, 03:20). S3 copies this file into `apps/api`; confirm the path.

@@ -4,6 +4,8 @@ Status: Complete for local data/content preparation · 12 October 2026
 
 Documentation publication update: 13 October 2026
 
+This is the October preparation record. Commit `2a6c843` subsequently added the chapter ledger and bilingual case JSON. The case-specific code and check results below describe the original local preparation. Open the [current case guide](ANALOG-MODULATION.md) for the files and commands available in this checkout.
+
 ## Objective and success
 
 Prepare repository-native content and learner/session data for **Analog Communication → Analog Modulation → DSB-SC Modulation & coherent demodulation**, following the existing v2 ledger and the user's confirmed journey.

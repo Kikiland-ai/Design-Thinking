@@ -2,6 +2,8 @@
 
 12 October 2026 · Proposal for the separate backend repo · Source checkout: `420f291`
 
+Use this proposal for prototype boundaries and technical rationale. Its diode example predates the current Odia ECE worked case. [Analog Modulation case](../../data-model/ANALOG-MODULATION.md) · [Current scope](../plans/kiki-scope-cleanup.md)
+
 The product needs a teaching medium as well as an adaptive learning backend: **source-grounded bilingual content, natural mixed-language speech, generated animated graphics, annotations synchronized with explanation, evidence-driven curation, diagnostic repair, and live lab guidance**. These seven directions are connected feature prototypes, with separate contracts for the systems underneath them. This revision supersedes the earlier proposal, which under-specified speech and graphics.
 
 The two annotation uses are interpreted as **teaching on an image/diagram** and **guiding on a live software screen**. Uploaded notes and handwritten-answer feedback fit the first use. Both support drawing, shapes, labels, and writing; their anchors and lifecycles differ. This interpretation follows the user's correction and the existing lesson/lab journeys.
