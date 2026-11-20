@@ -1,0 +1,122 @@
+[
+  {
+    "node": "predict-60",
+    "reply": "I think some of it comes through, just weaker than before.",
+    "lang": "en",
+    "expected_label": "part-survives"
+  },
+  {
+    "node": "predict-60",
+    "reply": "ସବୁ ଫେରିବ, କାରଣ Frequency ତ ସମାନ ଅଛି।",
+    "lang": "or",
+    "expected_label": "phase-does-not-matter"
+  },
+  {
+    "node": "predict-60",
+    "reply": "Kichhi bi pheriba nahin. Phase mela na khaile message puri hajijiba.",
+    "lang": "or",
+    "expected_label": "any-error-loses-all"
+  },
+  {
+    "node": "predict-60",
+    "reply": "None. Once the carriers are out of phase the message is gone completely.",
+    "lang": "en",
+    "expected_label": "any-error-loses-all"
+  },
+  {
+    "node": "predict-60",
+    "reply": "ଆଜି Canteen ରେ କଣ ମିଳୁଛି?",
+    "lang": "or",
+    "expected_label": "off_topic"
+  },
+  {
+    "node": "why-cos",
+    "reply": "Multiplying by the shifted carrier and filtering leaves m(t) times cos phi.",
+    "lang": "en",
+    "expected_label": "scaled-by-cos"
+  },
+  {
+    "node": "why-cos",
+    "reply": "Lowpass filter phase error ku remove kari dei, so output re pura m(t) asiba.",
+    "lang": "mixed",
+    "expected_label": "phase-does-not-matter"
+  },
+  {
+    "node": "why-cos",
+    "reply": "The product gives m(t)/2 and then the gain of 2 makes it m(t) again.",
+    "lang": "en",
+    "expected_label": "half-factor-only"
+  },
+  {
+    "node": "why-cos",
+    "reply": "Phase error ପାଇଁ m(t) ଟିକିଏ ଡେରିରେ ଆସେ, ଅର୍ଥାତ୍ ସମୟରେ ଘୁଞ୍ଚିଯାଏ।",
+    "lang": "or",
+    "expected_label": "unclear"
+  },
+  {
+    "node": "calc-60",
+    "reply": "cos 60 is 0.5, so half the amplitude.",
+    "lang": "en",
+    "expected_label": "half"
+  },
+  {
+    "node": "calc-60",
+    "reply": "Calculator re cos 60 dele -0.95 asuchhi.",
+    "lang": "or",
+    "expected_label": "angle-unit-mixup"
+  },
+  {
+    "node": "calc-60",
+    "reply": "60 degree re adha, mane aligned amplitude ra 0.5 times.",
+    "lang": "mixed",
+    "expected_label": "half"
+  },
+  {
+    "node": "calc-60",
+    "reply": "Two thirds, since 60 is two thirds of 90.",
+    "lang": "en",
+    "expected_label": "unclear"
+  },
+  {
+    "node": "predict-90",
+    "reply": "Nothing comes out because cos 90 is zero.",
+    "lang": "en",
+    "expected_label": "vanishes"
+  },
+  {
+    "node": "predict-90",
+    "reply": "90° ମାନେ ଅଧା Cycle, ତେଣୁ Message ଓଲଟା ହୋଇଯିବ।",
+    "lang": "or",
+    "expected_label": "angle-unit-mixup"
+  },
+  {
+    "node": "predict-90",
+    "reply": "Ideal case re kichhi asiba nahin because cos 90 = 0, but filter pain tike ripple rahipare.",
+    "lang": "mixed",
+    "expected_label": "vanishes"
+  },
+  {
+    "node": "predict-90",
+    "reply": "Will this come in the end-sem exam?",
+    "lang": "en",
+    "expected_label": "off_topic"
+  },
+  {
+    "node": "explain-english",
+    "reply": "The local carrier is 60 degrees out of phase, so after the product and the lowpass filter the output is m(t) cos phi. That gives half the amplitude at 60 degrees and nothing at 90 degrees.",
+    "lang": "en",
+    "expected_label": "clear-explanation"
+  },
+  {
+    "node": "explain-english",
+    "reply": "Phase error thile output kame. 60 re half, 90 re zero.",
+    "lang": "mixed",
+    "expected_label": "partial-explanation"
+  },
+  {
+    "node": "explain-english",
+    "reply": "Mote gote sentence starter diantu, kemiti arambha karibi?",
+    "lang": "mixed",
+    "expected_label": "unclear"
+  }
+]

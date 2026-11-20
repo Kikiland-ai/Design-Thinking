@@ -1,0 +1,354 @@
+{
+  "schema": "kiki-tutor-graph/v0",
+  "id": "engagement-drop-40",
+  "packId": "streaming-gta",
+  "title": { "en": "Why did engagement fall at minute 40?", "hi-Latn": "Minute 40 pe engagement kyun gira?" },
+  "problem": {
+    "en": "Meera, this is your launch-week Day 2 stream: 3 hours, peak 682 CCV. At 38:00 you had 556 viewers; by 59:00, 348 were left. That's a 37% drop. Let's work out why, from your own graph.",
+    "hi-Latn": "Meera, yeh tumhara launch week Day 2 ka stream hai: 3 ghante, peak 682 CCV. 38:00 pe 556 viewers the, 59:00 tak sirf 348 bache. Yaani 37% drop. Chalo, tumhare apne graph se samajhte hain kyun."
+  },
+  "caseData": {
+    "stream": "Launch week Day 2 · GTA 6 (named only) · 3 h · start 20:00 IST",
+    "peak": "682 CCV at 2:03:00",
+    "average": "509 CCV (illustrative agency target: 550)",
+    "drop": "556 at 38:00 → 348 at 59:00 (−37%)",
+    "chat": "87 messages/min at 37:00 → 15/min at 41:00",
+    "follows": "87 in total; 1 between 38:00 and 60:00",
+    "ip": "GTA 6 is named only. Charts are our own; no game footage, logos or artwork.",
+    "source": "scenario.json (same folder)"
+  },
+  "metrics": [
+    { "id": "diagnosis", "label": { "en": "Engagement diagnosis", "hi-Latn": "Engagement diagnosis" }, "dim": "concept" },
+    { "id": "audience", "label": { "en": "Audience reading", "hi-Latn": "Audience ko padhna" }, "dim": "concept" },
+    { "id": "structure", "label": { "en": "Content structure", "hi-Latn": "Content structure" }, "dim": "concept" },
+    { "id": "experiment", "label": { "en": "Next-stream experiment", "hi-Latn": "Next stream ka experiment" }, "dim": "concept" },
+    { "id": "articulation", "label": { "en": "Articulation", "hi-Latn": "Apni baat clear bolna" }, "dim": "english" }
+  ],
+  "sceneStates": {
+    "st-line": {
+      "template": "line",
+      "from": "line",
+      "states": {
+        "overview": { "show": ["ccv", "seg-pre", "seg-intro", "seg-mission", "seg-grind", "seg-vote", "seg-collab", "seg-wind", "mk-switch", "mk-raid-in"], "hide": ["chat"], "focus": [0, 179] },
+        "drop": { "show": ["ccv", "mk-drop"], "hide": ["chat", "seg-pre", "seg-intro", "seg-mission", "seg-grind", "seg-vote", "seg-collab", "seg-wind"], "highlight": ["ccv"], "focus": [25, 70] },
+        "bands": { "show": ["ccv", "seg-mission", "seg-grind", "seg-vote", "mk-switch", "mk-drop"], "hide": ["chat"], "highlight": ["seg-grind"], "focus": [10, 95] },
+        "chat-first": { "show": ["ccv", "chat", "seg-grind", "mk-switch", "mk-drop"], "highlight": ["chat"], "focus": [30, 50] },
+        "compare": { "show": ["ccv", "chat", "seg-grind", "seg-vote"], "highlight": ["seg-grind", "seg-vote"], "focus": [30, 95] }
+      }
+    }
+  },
+  "start": "n1-what-changed",
+  "nodes": {
+    "n1-what-changed": {
+      "kind": "probe",
+      "goal": "Get Meera to connect the drop to what changed on her stream at 38:00.",
+      "say": { "en": "Look at your graph: CCV starts falling right after 40:00. What was happening on stream just then?", "hi-Latn": "Apna graph dekho: 40:00 ke just baad CCV girna shuru hota hai. Us waqt stream pe kya chal raha tha?" },
+      "canvas": {
+        "sceneId": "st-line",
+        "state": "drop",
+        "annotate": [
+          { "id": "a-drop", "kind": "circle", "at": { "x": 40, "y": 555 }, "text": { "en": "40:00", "hi-Latn": "40:00" }, "dim": "concept" }
+        ]
+      },
+      "expect": [
+        { "id": "names-segment-change", "desc": "Links the drop to the segment change at 38:00: the mission ended and the silent grind started.", "metric": "diagnosis", "level": "ok", "next": "n2-chat-first" }
+      ],
+      "misconceptions": [
+        { "id": "m-external", "desc": "Blames something outside the stream (a bigger streamer went live, the algorithm, the platform) without checking her own segments.", "metric": "diagnosis", "level": "not_yet", "next": "s1-bands" }
+      ],
+      "hints": [
+        { "say": { "en": "What did you switch to on stream at 38:00?", "hi-Latn": "38:00 pe tumne stream pe kya switch kiya tha?" } },
+        { "say": { "en": "Check your run-of-show: 12 to 38 was the mission. Then?", "hi-Latn": "Apna run-of-show dekho: 12 se 38 mission tha. Uske baad?" } },
+        { "say": { "en": "At 38:00 the mission ended and the cash grind started. The drop comes two minutes later.", "hi-Latn": "38:00 pe mission khatam hua aur cash grind shuru hua. Drop do minute baad aata hai." },
+          "canvas": { "sceneId": "st-line", "state": "bands" } },
+        { "say": { "en": "The drop lines up with your segment change: from the mission to a silent grind.", "hi-Latn": "Drop tumhare segment change ke saath line up karta hai: mission se silent grind." } }
+      ],
+      "chips": [
+        { "label": { "en": "Grind started", "hi-Latn": "Grind shuru hua" }, "text": "38 pe mission khatam karke cash grind shuru kiya tha." },
+        { "label": { "en": "A bigger streamer went live", "hi-Latn": "Bada streamer live aaya" }, "text": "Bhai us time koi bada streamer live aaya tha, sab wahan chale gaye." },
+        { "label": { "en": "No idea", "hi-Latn": "Pata nahi" }, "text": "Pata nahi yaar, achanak gir gaya." }
+      ],
+      "onUnclear": "hint",
+      "onOffTopic": "redirect"
+    },
+    "s1-bands": {
+      "kind": "show",
+      "goal": "Show that the drop and the recovery both line up with her own segment changes, which an outside cause would not explain.",
+      "say": { "en": "Here are your segments on the same graph. The drop starts two minutes after the grind began, and CCV climbs back as soon as the next segment starts at 60:00. An outside cause wouldn't line up that neatly.", "hi-Latn": "Same graph pe apne segments dekho. Drop grind shuru hone ke 2 minute baad start hota hai, aur 60:00 pe naya segment aate hi CCV wapas chadhta hai. Bahar ki koi wajah itni exact line up nahi hoti." },
+      "canvas": {
+        "sceneId": "st-line",
+        "state": "bands",
+        "annotate": [
+          { "id": "a-grind-band", "kind": "box", "target": "seg-grind", "text": { "en": "Silent grind 38:00–60:00", "hi-Latn": "Silent grind 38:00–60:00" }, "dim": "concept" },
+          { "id": "a-recover", "kind": "arrow", "at": { "x0": 61, "y0": 351, "x1": 91, "y1": 477 }, "text": { "en": "Back up after 60:00", "hi-Latn": "60:00 ke baad wapas" }, "dim": "concept" }
+        ]
+      },
+      "next": "n2-chat-first"
+    },
+    "n2-chat-first": {
+      "kind": "probe",
+      "goal": "Get Meera to read chat as the early warning: it fell before CCV.",
+      "say": { "en": "Now add your chat line. Which fell first: chat or CCV?", "hi-Latn": "Ab chat wali line bhi dekho. Pehle kya gira: chat ya CCV?" },
+      "canvas": {
+        "sceneId": "st-line",
+        "state": "chat-first",
+        "annotate": [
+          { "id": "a-chat-fall", "kind": "arrow", "at": { "x0": 37, "y0": 87, "x1": 41, "y1": 15 }, "text": { "en": "Chat 87 → 15/min", "hi-Latn": "Chat 87 → 15/min" }, "dim": "concept" }
+        ]
+      },
+      "expect": [
+        { "id": "chat-leads", "desc": "Notices chat fell first (87 to 15 messages a minute between 37:00 and 41:00) while CCV only started falling after 40:00; chat is the early warning.", "metric": "audience", "level": "ok", "next": "n3-what-missing" },
+        { "id": "same-time", "desc": "Says both fell together, missing that chat led.", "metric": "audience", "level": "partial", "next": "n3-what-missing" }
+      ],
+      "hints": [
+        { "say": { "en": "At 39:00, where was chat, and where was CCV?", "hi-Latn": "39:00 pe chat kitna tha, aur CCV kitna?" } },
+        { "say": { "en": "Chat had halved by 39:00; CCV hadn't fallen even 10% until 43:00.", "hi-Latn": "Chat 39:00 tak aadha ho chuka tha; CCV 43:00 tak 10% bhi nahi gira tha." } },
+        { "say": { "en": "Chat fell four minutes earlier. That was the warning.", "hi-Latn": "Chat 4 minute pehle gira. Wahi warning thi." } },
+        { "say": { "en": "Chat rate falls before CCV: when chat goes quiet, viewers start leaving a few minutes later.", "hi-Latn": "Chat rate CCV se pehle girta hai: jab chat shaant hota hai, viewers kuch minute mein nikalne lagte hain." } }
+      ],
+      "chips": [
+        { "label": { "en": "Chat first", "hi-Latn": "Pehle chat" }, "text": "Arre, chat toh 38 se hi dead ho gaya tha. CCV baad mein gira." },
+        { "label": { "en": "Same time", "hi-Latn": "Dono saath" }, "text": "Dono ek saath hi gire na?" }
+      ],
+      "onUnclear": "hint",
+      "onOffTopic": "redirect"
+    },
+    "n3-what-missing": {
+      "kind": "probe",
+      "goal": "Get Meera to name what the grind lacked compared with the mission: talk, a stated goal, a chat loop.",
+      "say": { "en": "So chat went quiet first. What did the grind segment lack that the mission had?", "hi-Latn": "Matlab chat pehle shaant hua. Grind segment mein kya missing tha jo mission mein tha?" },
+      "canvas": {
+        "sceneId": "st-line",
+        "state": "bands",
+        "annotate": [
+          { "id": "a-mission", "kind": "label", "target": "seg-mission", "text": { "en": "Chat 86/min", "hi-Latn": "Chat 86/min" }, "dim": "concept" },
+          { "id": "a-grind", "kind": "label", "target": "seg-grind", "text": { "en": "Chat 18/min", "hi-Latn": "Chat 18/min" }, "dim": "concept" }
+        ]
+      },
+      "expect": [
+        { "id": "no-hook-no-loop", "desc": "Names what was missing: commentary, a stated goal or stakes, and a chat loop (reading chat, a poll).", "metric": "structure", "level": "ok", "next": "n4-experiment" }
+      ],
+      "misconceptions": [
+        { "id": "m-grind-bad", "desc": "Concludes that grinding itself is the problem ('never grind again'), not how the grind was run.", "metric": "structure", "level": "partial", "next": "s2-compare" }
+      ],
+      "hints": [
+        { "say": { "en": "What were you doing during the mission that stopped in the grind?", "hi-Latn": "Mission ke time tum kya kya kar rahi thi jo grind mein band ho gaya?" } },
+        { "say": { "en": "Mic, goal, chat: what happened to all three?", "hi-Latn": "Mic, goal, chat: teeno ka kya hua?" } },
+        { "say": { "en": "In the grind your mic was mostly off, no goal was said and chat wasn't read.", "hi-Latn": "Grind mein mic mostly off tha, koi goal nahi bola, aur chat nahi padha." } },
+        { "say": { "en": "The hook was gone: no talk, no goal, no chat loop.", "hi-Latn": "Hook gayab tha: na baat, na goal, na chat loop." } }
+      ],
+      "chips": [
+        { "label": { "en": "No talk, no goal", "hi-Latn": "Na baat, na goal" }, "text": "Mic off tha, koi goal nahi bola, chat bhi nahi padha." },
+        { "label": { "en": "Grinding is boring", "hi-Latn": "Grind boring hai" }, "text": "Grind content hi boring hai. Next time grind hi nahi karungi." }
+      ],
+      "onUnclear": "hint",
+      "onOffTopic": "redirect"
+    },
+    "s2-compare": {
+      "kind": "show",
+      "goal": "Correct the overcorrection: the same kind of mission-free gameplay recovered when it was run with chat polls and talk.",
+      "say": { "en": "Compare 38–60 with 60–92. Neither had a mission; both were just gameplay. In the second you ran two chat polls and talked through the plan, and CCV went from 351 to 477. Same game, different structure.", "hi-Latn": "38–60 ko 60–92 se compare karo. Dono mein mission nahi tha, dono bas gameplay tha. Doosre mein tumne do chat polls chalaye aur plan bol-bol ke khela, aur CCV 351 se 477 pe pahuncha. Game same, structure alag." },
+      "canvas": {
+        "sceneId": "st-line",
+        "state": "compare",
+        "annotate": [
+          { "id": "a-ret-grind", "kind": "box", "target": "seg-grind", "text": { "en": "Retention 0.63", "hi-Latn": "Retention 0.63" }, "dim": "concept" },
+          { "id": "a-ret-vote", "kind": "box", "target": "seg-vote", "text": { "en": "Retention 1.36", "hi-Latn": "Retention 1.36" }, "dim": "concept" }
+        ]
+      },
+      "next": "n4-experiment"
+    },
+    "n4-experiment": {
+      "kind": "probe",
+      "goal": "Get Meera to design one testable change for the next stream, with a measure.",
+      "say": { "en": "Grinds will happen in launch week. Pick one change for your next stream, and say how you'll know it worked.", "hi-Latn": "Launch week mein grind toh hoga hi. Next stream ke liye ek change socho, aur batao kaise pata chalega ki kaam kiya." },
+      "canvas": {
+        "sceneId": "st-line",
+        "state": "bands",
+        "annotate": [
+          { "id": "a-next", "kind": "label", "target": "seg-grind", "text": { "en": "Next stream: ?", "hi-Latn": "Next stream: ?" }, "dim": "concept" }
+        ]
+      },
+      "expect": [
+        { "id": "testable-change", "desc": "Proposes one specific change (for example grind at most 10 minutes, say the goal, a poll every 5 minutes) with a success measure (chat rate, CCV change in that segment).", "metric": "experiment", "level": "ok", "next": "n5-pitch" },
+        { "id": "vague-change", "desc": "Proposes a change without a measure, or several changes at once.", "metric": "experiment", "level": "partial", "next": "n5-pitch" }
+      ],
+      "hints": [
+        { "say": { "en": "One change only. What will you change, and which number will you watch?", "hi-Latn": "Sirf ek change. Kya badlogi, aur kaunsa number dekhogi?" } },
+        { "say": { "en": "Playbook §5: grind at most 10 minutes, say the goal, run a chat mechanic.", "hi-Latn": "Playbook §5: grind max 10 minute, goal bolo, chat mechanic chalao." } },
+        { "say": { "en": "For example: 'Grind 10 minutes, a poll every 5 minutes. Success: chat above 40 a minute, CCV drop under 10%.'", "hi-Latn": "Jaise: 'Grind 10 minute, har 5 minute poll. Success: chat 40/min se upar, CCV drop 10% se kam.'" } },
+        { "say": { "en": "One change, one measure, one stream. Then check the result in the next review.", "hi-Latn": "Ek change, ek measure, ek stream. Phir agle review mein result dekho." } }
+      ],
+      "chips": [
+        { "label": { "en": "Short grind + poll", "hi-Latn": "Chhota grind + poll" }, "text": "Grind max 10 min, pehle goal bolungi, har 5 min ek poll. Chat 40/min se upar rahe aur CCV 10% se kam gire toh kaam kiya." },
+        { "label": { "en": "More energy", "hi-Latn": "Zyada energy" }, "text": "Next time zyada energy ke saath khelungi." }
+      ],
+      "onUnclear": "hint",
+      "onOffTopic": "redirect"
+    },
+    "n5-pitch": {
+      "kind": "probe",
+      "goal": "Get Meera to pitch the diagnosis and the experiment to her agency manager in two lines (expression evidence).",
+      "say": { "en": "Your agency manager has 30 seconds. Pitch the diagnosis and the experiment in two lines.", "hi-Latn": "Tumhare agency manager ke paas 30 second hain. Diagnosis aur experiment do line mein pitch karo." },
+      "canvas": { "sceneId": "st-line", "state": "overview" },
+      "expect": [
+        { "id": "clear-pitch", "desc": "Two clear lines: the cause (silent grind after the mission; chat fell first, CCV −37%) and the experiment with its measure.", "metric": "articulation", "level": "ok", "next": "c1-conclusion" },
+        { "id": "partial-pitch", "desc": "Misses the cause or the measure, or runs long.", "metric": "articulation", "level": "partial", "next": "c1-conclusion" }
+      ],
+      "hints": [
+        { "say": { "en": "Line 1: what happened and why. Line 2: what you'll do next stream, and how you'll measure it.", "hi-Latn": "Line 1: kya hua aur kyun. Line 2: next stream mein kya karogi, aur kaise naapogi." } },
+        { "say": { "en": "Start with the number: 'CCV fell 37% during…'", "hi-Latn": "Number se shuru karo: 'CCV 37% gira jab…'" } },
+        { "say": { "en": "'…a 22-minute silent grind after the mission; chat dropped first.' Then the change and the target.", "hi-Latn": "'…mission ke baad 22 minute ka silent grind tha; chat pehle gira.' Phir change aur target." } },
+        { "say": { "en": "'A 22-minute silent grind after the mission cost 37% of CCV; chat fell first. Next stream: grind 10 minutes with a goal and a poll every 5 minutes; target chat above 40 a minute and a CCV drop under 10%.'", "hi-Latn": "'Mission ke baad 22 minute ke silent grind mein CCV 37% gira; chat pehle gira. Next stream: grind 10 minute, goal + har 5 minute poll; target chat 40/min se upar aur CCV drop 10% se kam.'" } }
+      ],
+      "onUnclear": "hint",
+      "onOffTopic": "redirect"
+    },
+    "c1-conclusion": {
+      "kind": "conclusion",
+      "goal": "Close with the conclusion Meera reached, in her language, and hand off to the scorecard.",
+      "say": { "en": "Here's what you worked out.", "hi-Latn": "Tumne jo nikala, woh yeh hai." },
+      "canvas": { "sceneId": "st-line", "state": "overview" },
+      "summary": {
+        "en": "The drop wasn't the platform or tired viewers. At 38:00 the mission ended and a silent grind began: no goal, no talk, no chat loop. Chat fell first (87 to 15 a minute), then CCV (556 to 348, −37%). When you brought chat back at 60:00, CCV recovered to 477. Next stream: grind at most 10 minutes, say the goal, poll every 5 minutes. Success: chat above 40 a minute and a CCV drop under 10% in that segment.",
+        "hi-Latn": "Drop platform ya thake hue viewers ki wajah se nahi tha. 38:00 pe mission khatam hua aur silent grind shuru hua: na goal, na baat, na chat loop. Pehle chat gira (87 se 15 per minute), phir CCV (556 se 348, −37%). 60:00 pe chat ko wapas laayi toh CCV 477 tak recover hua. Next stream: grind max 10 minute, goal bolo, har 5 minute poll. Success: us segment mein chat 40/min se upar aur CCV drop 10% se kam."
+      }
+    }
+  },
+  "scriptedPath": [
+    {
+      "turn": 1, "node": "n1-what-changed", "hintLevel": 0,
+      "kiki": { "en": "Look at your graph: CCV starts falling right after 40:00. What was happening on stream just then?", "hi-Latn": "Apna graph dekho: 40:00 ke just baad CCV girna shuru hota hai. Us waqt stream pe kya chal raha tha?" },
+      "user": { "lang": "hi-Latn", "text": "38 pe mission khatam karke cash grind shuru kiya tha… shayad wahi?", "en": "At 38 I finished the mission and started grinding cash… maybe that?" },
+      "route": { "label": "names-segment-change", "matched": ["names-segment-change"], "misconception": null, "confidence": 0.88, "quote": "38 pe mission khatam karke cash grind shuru kiya tha" },
+      "canvasCue": "CCV line, 25:00 to 70:00, drop circled at 40:00.",
+      "evidence": [ { "metric": "diagnosis", "dim": "concept", "level": "ok", "quote": "38 pe mission khatam karke cash grind shuru kiya tha" } ],
+      "graphMap": { "current": "n1-what-changed", "lit": ["n1-what-changed"] },
+      "next": "n2-chat-first",
+      "video": { "show": true, "shot": "ST-04" }
+    },
+    {
+      "turn": 2, "node": "n2-chat-first", "hintLevel": 0,
+      "kiki": { "en": "Now add your chat line. Which fell first: chat or CCV?", "hi-Latn": "Ab chat wali line bhi dekho. Pehle kya gira: chat ya CCV?" },
+      "user": { "lang": "hi-Latn", "text": "Arre, chat toh 38 se hi dead ho gaya tha. CCV baad mein gira.", "en": "Oh, chat was dead from 38 itself. CCV fell later." },
+      "route": { "label": "chat-leads", "matched": ["chat-leads"], "misconception": null, "confidence": 0.91, "quote": "chat toh 38 se hi dead ho gaya tha. CCV baad mein gira" },
+      "canvasCue": "Chat line joins the CCV line; arrow on chat 87 → 15/min between 37:00 and 41:00.",
+      "evidence": [ { "metric": "audience", "dim": "concept", "level": "ok", "quote": "chat toh 38 se hi dead ho gaya tha. CCV baad mein gira" } ],
+      "graphMap": { "current": "n2-chat-first", "lit": ["n1-what-changed", "n2-chat-first"] },
+      "next": "n3-what-missing",
+      "video": { "show": true, "shot": "ST-05" }
+    },
+    {
+      "turn": 3, "node": "n3-what-missing", "hintLevel": 0,
+      "kiki": { "en": "So chat went quiet first. What did the grind segment lack that the mission had?", "hi-Latn": "Matlab chat pehle shaant hua. Grind segment mein kya missing tha jo mission mein tha?" },
+      "user": { "lang": "hi-Latn", "text": "Matlab grind content hi boring hai. Next time grind hi nahi karungi.", "en": "So grinding content is just boring. Next time I won't grind at all." },
+      "route": { "label": "m-grind-bad", "matched": [], "misconception": "m-grind-bad", "confidence": 0.84, "quote": "grind content hi boring hai" },
+      "canvasCue": "Mission and grind bands labelled 'Chat 86/min' and 'Chat 18/min'.",
+      "evidence": [ { "metric": "structure", "dim": "concept", "level": "partial", "quote": "grind content hi boring hai" } ],
+      "graphMap": { "current": "n3-what-missing", "lit": ["n1-what-changed", "n2-chat-first", "n3-what-missing"], "misconceptionEdge": "n3-what-missing→s2-compare" },
+      "next": "s2-compare",
+      "video": { "show": true, "shot": "ST-06" }
+    },
+    {
+      "turn": 4, "node": "s2-compare", "hintLevel": 0,
+      "kiki": { "en": "Compare 38–60 with 60–92. Neither had a mission; both were just gameplay. In the second you ran two chat polls and talked through the plan, and CCV went from 351 to 477. Same game, different structure.", "hi-Latn": "38–60 ko 60–92 se compare karo. Dono mein mission nahi tha, dono bas gameplay tha. Doosre mein tumne do chat polls chalaye aur plan bol-bol ke khela, aur CCV 351 se 477 pe pahuncha. Game same, structure alag." },
+      "user": null,
+      "route": null,
+      "canvasCue": "Both bands boxed: 38–60 'Retention 0.63', 60–92 'Retention 1.36'; chat line visible in both.",
+      "evidence": [],
+      "graphMap": { "current": "s2-compare", "lit": ["n1-what-changed", "n2-chat-first", "n3-what-missing", "s2-compare"] },
+      "next": "n4-experiment",
+      "video": { "show": true, "shot": "ST-06" }
+    },
+    {
+      "turn": 5, "node": "n4-experiment", "hintLevel": 0,
+      "kiki": { "en": "Grinds will happen in launch week. Pick one change for your next stream, and say how you'll know it worked.", "hi-Latn": "Launch week mein grind toh hoga hi. Next stream ke liye ek change socho, aur batao kaise pata chalega ki kaam kiya." },
+      "user": { "lang": "hi-Latn", "text": "Grind max 10 min, pehle goal bolungi, har 5 min ek poll. Us segment mein chat 40/min se upar rahe aur CCV 10% se kam gire, toh kaam kiya.", "en": "Grind 10 minutes max, I'll say the goal first, a poll every 5 minutes. If chat stays above 40 a minute and CCV falls less than 10% in that segment, it worked." },
+      "route": { "label": "testable-change", "matched": ["testable-change"], "misconception": null, "confidence": 0.93, "quote": "chat 40/min se upar rahe aur CCV 10% se kam gire" },
+      "canvasCue": "Label on the grind band changes from 'Next stream: ?' to 'Next: ≤10 min · goal · poll every 5 min'.",
+      "evidence": [ { "metric": "experiment", "dim": "concept", "level": "ok", "quote": "chat 40/min se upar rahe aur CCV 10% se kam gire" } ],
+      "graphMap": { "current": "n4-experiment", "lit": ["n1-what-changed", "n2-chat-first", "n3-what-missing", "s2-compare", "n4-experiment"] },
+      "next": "n5-pitch",
+      "video": { "show": true, "shot": "ST-07" }
+    },
+    {
+      "turn": 6, "node": "n5-pitch", "hintLevel": 0,
+      "kiki": { "en": "Your agency manager has 30 seconds. Pitch the diagnosis and the experiment in two lines.", "hi-Latn": "Tumhare agency manager ke paas 30 second hain. Diagnosis aur experiment do line mein pitch karo." },
+      "user": { "lang": "hi-Latn", "text": "Mission ke baad 22 min ka silent grind: chat pehle gira, phir CCV 37%, segment retention 0.63. Next stream: grind 10 min, goal + har 5 min poll; target chat 40+/min, CCV drop 10% se kam.", "en": "A 22-minute silent grind after the mission: chat fell first, then CCV by 37%, segment retention 0.63. Next stream: grind 10 minutes, goal plus a poll every 5 minutes; target chat 40+ a minute, CCV drop under 10%." },
+      "route": { "label": "clear-pitch", "matched": ["clear-pitch"], "misconception": null, "confidence": 0.95, "quote": "chat pehle gira, phir CCV 37%" },
+      "expression": { "clarity": 2, "termsUsed": ["CCV", "retention", "chat", "segment", "poll", "grind"] },
+      "canvasCue": "Full-stream overview; her two lines appear in a 'Pitch to agency' card.",
+      "evidence": [
+        { "metric": "articulation", "dim": "english", "level": "ok", "quote": "Next stream: grind 10 min, goal + har 5 min poll; target chat 40+/min, CCV drop 10% se kam" },
+        { "dim": "words", "level": "ok", "quote": "CCV, segment retention, poll", "note": "From the classifier's expression.termsUsed (contract §4), not a separate question." }
+      ],
+      "graphMap": { "current": "n5-pitch", "lit": ["n1-what-changed", "n2-chat-first", "n3-what-missing", "s2-compare", "n4-experiment", "n5-pitch"] },
+      "next": "c1-conclusion",
+      "video": { "show": true, "shot": "ST-08" }
+    },
+    {
+      "turn": 7, "node": "c1-conclusion", "hintLevel": 0,
+      "kiki": { "en": "Here's what you worked out.", "hi-Latn": "Tumne jo nikala, woh yeh hai." },
+      "user": null,
+      "route": null,
+      "canvasCue": "Overview with all segment bands; summary card in Hinglish.",
+      "evidence": [],
+      "graphMap": { "current": "c1-conclusion", "lit": ["n1-what-changed", "n2-chat-first", "n3-what-missing", "s2-compare", "n4-experiment", "n5-pitch", "c1-conclusion"] },
+      "done": true,
+      "video": { "show": true, "shot": "ST-08" }
+    }
+  ],
+  "scriptedScorecard": {
+    "metrics": [
+      { "id": "diagnosis", "level": "ok", "evidence": ["T1: '38 pe mission khatam karke cash grind shuru kiya tha'"] },
+      { "id": "audience", "level": "ok", "evidence": ["T2: 'chat toh 38 se hi dead ho gaya tha. CCV baad mein gira'"] },
+      { "id": "structure", "level": "partial", "evidence": ["T3: misconception m-grind-bad ('grind content hi boring hai'), corrected by the comparison in s2"] },
+      { "id": "experiment", "level": "ok", "evidence": ["T5: one change with a measure: chat above 40/min, CCV drop under 10%"] },
+      { "id": "articulation", "level": "ok", "evidence": ["T6: two lines with cause, number and experiment"] }
+    ],
+    "next": [
+      { "kind": "concept", "id": "segment-design", "why": { "en": "You first blamed grinding itself. One more contrast: what makes a slow segment hold.", "hi-Latn": "Pehle tumne grind ko hi blame kiya. Ek aur contrast: slow segment ko hold kaise karte hain." } },
+      { "kind": "lab", "id": "run-of-show-plan", "why": { "en": "Put the experiment into tomorrow's run-of-show.", "hi-Latn": "Experiment ko kal ke run-of-show mein daalo." } }
+    ]
+  },
+  "videoScorecard": {
+    "note": "What the Evidence shot shows: the four dimensions after Do (dashboard) and Reflect (tutor). Colours: concept green, words red, expression yellow, practice blue. Levels show as filled, half-filled or outlined.",
+    "dimensions": [
+      { "dim": "concept", "label": { "en": "Concept", "hi-Latn": "Concept" }, "level": "partial", "from": "tutor: diagnosis ok, audience ok, experiment ok, structure partial" },
+      { "dim": "words", "label": { "en": "Words", "hi-Latn": "Words" }, "level": "ok", "from": "tutor: CCV, retention, segment, poll used correctly in T6" },
+      { "dim": "english", "label": { "en": "Expression", "hi-Latn": "Expression" }, "level": "ok", "from": "tutor: articulation ok in T6" },
+      { "dim": "lab", "label": { "en": "Practice", "hi-Latn": "Practice" }, "level": "ok", "from": "Do: she selected 38:00–60:00 on her dashboard and compared chat rate herself" }
+    ],
+    "cohortLine": {
+      "en": "Agency view · illustrative cohort of 18 new creators · Reading your analytics · primary gap: Concept 5 · Words 2 · Expression 4 · Practice 7",
+      "hi-Latn": "Agency view · illustrative cohort, 18 naye creators · Analytics padhna · main gap: Concept 5 · Words 2 · Expression 4 · Practice 7",
+      "headline": { "en": "7 of 18 new creators can explain retention but don't yet act on it in the dashboard: a practice gap.", "hi-Latn": "18 mein se 7 naye creators retention samjha sakte hain, par dashboard mein abhi us pe act nahi karte: yeh practice gap hai." }
+    }
+  },
+  "meta": {
+    "illustrative": true,
+    "status": "Draft for S5 review. Machine-drafted Hinglish; needs a native Hinglish reviewer and a practising streamer.",
+    "languageReview": { "en": "draft", "hi-Latn": "draft (machine draft)" },
+    "languageCode": "hi-Latn (BCP 47: Hindi in Latin script) for romanised Hinglish. Contract §0 lists ISO 639-1 codes only; the hub should confirm this code.",
+    "extraFields": "scriptedPath, scriptedScorecard, videoScorecard, sceneStates and meta are additive fields for the video and a replay. They are not part of kiki-tutor-graph/v0; a v0 loader can ignore them.",
+    "scoringRules": [
+      "A metric's level is its latest evidence, except: a branch reached after a hint rung is capped at partial; after the answer rung it is not_yet.",
+      "A misconception corrected by a show node leaves that metric at most partial until later evidence.",
+      "Words evidence comes from expression.termsUsed; expression evidence from the articulation node and expression.clarity."
+    ],
+    "metricDefinitions": {
+      "diagnosis": "Finds the cause of the engagement change in her own stream data, not outside it.",
+      "audience": "Reads what the audience did and when: chat as the early warning, CCV as the lagging measure.",
+      "structure": "Names what a segment needs to hold viewers (talk, a goal or stakes, a chat loop) and doesn't overcorrect.",
+      "experiment": "Designs one change for the next stream with a measure and a threshold.",
+      "articulation": "Pitches the diagnosis and the experiment to her agency manager in two lines."
+    },
+    "mapLayout": {
+      "note": "Positions for the small decision-graph map (0 to 1, left to right, top to bottom).",
+      "n1-what-changed": [0.06, 0.35], "s1-bands": [0.16, 0.75], "n2-chat-first": [0.28, 0.35], "n3-what-missing": [0.46, 0.35],
+      "s2-compare": [0.56, 0.75], "n4-experiment": [0.68, 0.35], "n5-pitch": [0.83, 0.35], "c1-conclusion": [0.95, 0.35]
+    },
+    "audio": "No audio files yet. Pre-generate KiKi's Hinglish lines per node with TTS (contract: TutorNode.audio).",
+    "canvasCoordinates": "line: x = stream minute (0 to 179), y = CCV or chat messages per minute (same axis; S1 may add a second axis for chat). Band and marker ids are targets."
+  }
+}
